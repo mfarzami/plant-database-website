@@ -1,0 +1,175 @@
+html {
+    font-family: Optima, sans-serif;
+}
+
+nav li {
+    display: inline-block;
+    padding: 15px;
+  }
+
+nav {
+    text-align: center;
+    font-size: 14pt;
+  }
+
+nav a {
+    text-decoration: none;
+    color: rgb(77, 75, 75);
+  }
+
+h1 {
+    text-align: center;
+  }
+
+.plant {
+  display: inline-flex;
+  background-color: rgb(207, 241, 214);
+  width: 1050px;
+  margin-bottom: 30px;
+  line-height: 100%;
+  height: 250px;
+}
+
+.search {
+  margin-left: 10px;
+}
+
+.button {
+  display: flex;
+  flex-direction: row;
+}
+
+.button select {
+  height: 25px;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.plant h2 {
+  line-height: 150%;
+  width: 200px;
+}
+
+.plant h3 {
+  line-height: 170%;
+  font-size: 10pt;
+}
+
+.plant .name {
+  width: 400px;
+  margin: 20px;
+}
+
+.plant .hor {
+  display: flex;
+  flex-direction: column;
+  height: 100px;
+}
+
+.plant .play {
+  display: inline-flex;
+  height: 30%;
+  margin-bottom: 50px;
+}
+
+.plant .play h4 {
+  height: 40px;
+}
+
+.plant .text {
+  display: inline-flex;
+  height: 30%;
+}
+
+.plant p {
+  font-size: 9pt;
+}
+
+.plant .name h2 {
+  margin: 0px;
+}
+
+.plant .play p {
+  width: 30%;
+}
+
+.plant .text h4{
+  margin-bottom: -15px;
+  margin-right: 10px;
+  margin-top: 25px;
+}
+
+.plant .text {
+  width: 800px;
+}
+
+.plant .text .blurb {
+  display: block;
+  width: 400px;
+  padding-top: 20px;
+}
+
+.plant .play .blurb {
+  display: block;
+  width: 100px;
+}
+
+.blurb h5{
+  line-height: 0px;
+  margin-top: 0;
+  align-self: center;
+}
+
+.formsubmit {
+  padding-left: 700px;
+}
+
+.blurb p{
+  width: 70%;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.plant h5 {
+  font-size: 14pt;
+}
+
+.formtext {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+.field {
+  display: flex;
+}
+
+.checkboxes {
+  padding-top: 20px;
+}
+.describe {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+.submit {
+  margin-top: 20px;
+  margin-left: 250px;
+}
+
+.feedback {
+  color: red;
+}
+.hidden {
+  display: none;
+}
+
+@media print {
+  nav, header, .search, form{
+    display: none;
+}
+}
