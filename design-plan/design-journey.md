@@ -128,13 +128,25 @@ _Administrator_ Goal 4: Log in to the site to have access to these tasks
 > **Important!** Plan _all_ site requirements. Don't forget login and logout.
 
 _Initial Designs / Design Iterations:_
+_(Final design choices marked with green star)_
 
-TODO
+![Consumer view sketch](consumerview.jpg)
 
+In this file I show the design ideas I went through for the consumer's view (on a mobile screen) of the database. I decided to include the images of each plant, its playtypes, and its gardening information (growing needs and characteristics). These are all essential pieces of information for Minori (consumer) to choose and learn about a plant. The playtypes, like in the last project, are important to having her choose the best fit for her child based on their needs/interests. The gardening information is important to she knows how to plant it, especially if she isn't experienced in gardening. The blurbs I included in project 2 (regarding visual interest, tactile, edible, and smell) are no longer necessary because the image shows most of these characteristics and the information would overwhelm Minori. Minori also does not need to see any form of id (plant id, tag id, etc) since those numbers will have no meaning to her.
 
-_Final Design:_
+I started with two tile formats for entries, one with two columns and one with the entries stacked. I thought the stacked one was more familiar for smartphone users because of the commonness of scrolling the internet/texts/social media. Then I made another version of it that was more condensed in order to allow Minori to see as many plants at once as possible since she likes to see all options before deciding. This would also save time for her since she's busy. I also chose a more basic detailed view style for an individual plant because the pop up option would confuse Minori due to its unfamiliarity.
 
-TODO
+![Filter/sort sketch](filtersort.jpg)
+
+Here is my filtering/sorting form (I sketched it seperately to the database so I could draw it bigger). I chose to use checkboxes for the playtypes and dropdown menu for the sorting options, with the search button on the right bottom to go with Minori's eyeline.
+
+![Admin view sketch](adminview.jpg)
+
+Then I sketched the adminstrator view (on a laptop screen). Their database is different because it doesn't include the image files (I assume the admins have the images already in a folder on their computer and can refer to them from the given ids, loading the images would just take up time and space on the screen). Also contrary to Minori's screen, Skye's (administrator) screen will have all tags listed and she will be able to filter by tag. Admins will likely need to make sure the tags are up to date especially when items are being deleted/edited all the time. I chose the tile-style database as oppose to the grey and white one on the left because the large amount of information would be crammed into one row in the first option. The layout of the second option would also support Skye's eyeline more by putting most important information on the top of the tile. My add plant form is similiar to my last one except it has an input to upload a file for the plant.
+
+![Edit/delete sketch](editdelete.jpg)
+
+Here I seperately sketched out the edit/delete features of the site. I decided having links with straightforward words on them would be better than icons to support Skye's wish to have self explanatory technology and also better than buttons to support avoiding an excess of "submit" buttons regarding catalog design ideals.
 
 _URLS:_
 | Route | PHP File                            |
@@ -146,7 +158,7 @@ _URLS:_
 ### Design Pattern Explanation/Reflection (Milestone 1)
 > Write a one paragraph (6-8 sentences) reflection explaining how you used design patterns for media catalogs in your site's final design.
 
-TODO
+For the consumer view of the site, I tried out both popular layouts for a catalog: grid and tiled. Both of these are very popular in media catalogs but I went with the tiled one for the sake of Minori's cognitive styles. The detailed page when you click on an entry is also a common feature of a media catalog. Mine brings Minori to a new page with an enlarged photo and added information if she wishes to learn more. I also noticed that many interactive media catalogs (like drives/photo albums) have icons to delete/share/edit photos which I liked, but I used words instead because of Minori's cognitive styles. I tried to follow the idea of having the most important information about an entry be displayed before clicking on it, and then the rest of the information coming up after clicking. Another trend I noticed in these catalogs is that the image is always on the left hand side if it is a tile-style, which is probably because it is helpful for the user's eyeline. I followed this as well. Lastly, the sorting/filtering form is usually either on top above the entries or on the left hand side. I noticed that the form being on the left hand side is more common when there are a lot of things to filter/sort by, which there aren't in this site so I could fit it right above without being distracting.
 
 
 ### Cognitive Styles Explanation/Reflection (Milestone 1)
@@ -154,12 +166,12 @@ TODO
 
 _Consumer Cognitive Styles Reflection:_
 
-TODO
+Minori is able to scroll through the entries in a way that is familiar to her from other mobile internet experiences. In this way she doesn't have to learn new technology. When she clicks on an entry it takes her to a straightforward page with just the information about the plant. The tiles are condensed on the main page in order to save her time in her busy schedule.
 
 
 _Site Administrator Cognitive Styles Reflection:_
 
-TODO
+Skye will have an obvious place to log into the admin part of the site, in the nav bar. She won't have much learning to do (no tinkering required) because each part of the site (filtering/sorting the database, browsing the database, adding a plant) is very explicitly labeled. When editing/deleting an entry, Skye will see clearly labeled EDIT and DELETE links rather than unfamiliar icons. The feedback she recieves on the log in and add a plant forms will be encouraging and specific, so that she doesn't need to guess where she went wrong.
 
 
 ## Implementation Plan (Milestone 1, Milestone 2, Milestone 3, Final Submission)
@@ -169,11 +181,19 @@ TODO
 > **Hint: You probably need a table for "entries", `tags`, `"entry"_tags`** (stores relationship between entries and tags), and a `users` tables.
 > **Hint: For foreign keys, use the singular name of the table + _id.** For example: `image_id` and `tag_id` for the `image_tags` (tags for each image) table.
 
-Table: TODO
+Table: plants
 
-- field1: TYPE {constraints...},
-- field2...
-- TODO
+- id: INT {NN, PK, U, AI}
+- plant_name: TEXT {NN}
+- species_name: TEXT {NN}
+- is_exploratoryconstructive: INT {NN}
+- is_exploratorysensory: INT {NN}
+- is_physical: INT {NN}
+- is_imaginative: INT {NN}
+- is_restorative: INT {NN}
+- is_expressive: INT {NN}
+- is_withrules: INT {NN}
+- is_bioplay: INT {NN}
 
 
 ### Database Query Plan (Milestone 1, Milestone 2, Milestone 3, Final Submission)
