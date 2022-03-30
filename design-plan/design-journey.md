@@ -20,9 +20,9 @@ You can use bullet points and lists, or full paragraphs, or a combo, whichever i
 > Briefly explain who the intended audiences are for your project website.
 > **DO NOT INVENT RANDOM AUDIENCES HERE!** Use the audiences from the requirements.
 
-_Consumer_: TODO
+_Consumer_: The consumers are the people who will be browsing/shopping from/learning from the Playful Plants project database. These people are generally assumed to be parents or caregivers of children of developing ages, since play with plants is most effective for children of developing ages.
 
-_Site Administrator_: TODO
+_Site Administrator_: The administrators are the members of the Playful Plants project who are researchers at Cornell University. They will be using the site to log in as an administrator and add plants with their respective information to the database.
 
 
 ### _Consumer_ Audience Goals (Milestone 1)
@@ -30,22 +30,40 @@ _Site Administrator_: TODO
 > List each goal below. There is no specific number of goals required for this, but you need enough to do the job.
 > **DO NOT INVENT RANDOM GOALS HERE OR STEREOTYPE HERE!** Your goals are things that your users want accomplish when using the site (e.g. print a list of plants). These are informed by the Playful Plants objectives. Review the assignment's requirements for details.
 
-_Consumer_ Goal 1: TODO: Brief Title
+_Consumer_ Goal 1: Learn about each plant's benefits and gardening details
 
 - **Design Ideas and Choices** _How will you meet those goals in your design?_
-  - TODO
+  - I will make sure each plant in the database has its intended types of plays clearly listed out and any given details about how to garden/care for it explicitly mentioned.
 - **Rationale & Additional Notes** _Justify your decisions; additional notes._
-  - TODO
+  - As a caregiver of a child, it is important to know exactly how something you're providing your child will help them, especially when you are putting the in the immense effort of planting a plant for them. Also, since a caregiver is not necessarily an experienced gardener, any information about how to care for this plant is super important to their experience with the project.
 
-_Consumer_ Goal 2: TODO
+_Consumer_ Goal 2: See all plants in the database at once and have access to new plants as they come in
 
-TODO
+- **Design Ideas and Choices** _How will you meet those goals in your design?_
+  - The page that contains the plants will be formatted in a way that the consumer can scroll through and see all of the plants, including ones that have been added recently by the administrator.
+- **Rationale & Additional Notes** _Justify your decisions; additional notes._
+  - The consumers are likely to care a lot about their children's wellbeing and for that reason would want to have full and updated access to the database to make sure they're choosing the right plants for them. If they are consistent users of the site, they also will likely be interested in reading about newly added plants they haven't seen yet.
 
-_Consumer_ Goal 3: TODO
+_Consumer_ Goal 3: Be able to filter/sort the database and browse it by a certain tag
 
-TODO
+- **Design Ideas and Choices** _How will you meet those goals in your design?_
+  - The consumer will have the option to filter the database using checkboxes and sort the database using a dropdown menu.
+- **Rationale & Additional Notes** _Justify your decisions; additional notes._
+  - Being able to search the database using certain methods makes it a lot more usable for consumers because it allows them to pinpoint the plants they want more effeciantly or find a specific one.
 
-TODO: ...
+_Consumer_ Goal 4: Print the full or a filtered/sorted list of plants
+
+- **Design Ideas and Choices** _How will you meet those goals in your design?_
+  - I will make sure the CSS settings properly allow the consumer to print a well formatted list of plants from any given search.
+- **Rationale & Additional Notes** _Justify your decisions; additional notes._
+  - Many consumers may find it easier to have a list of plants in a concrete form on a piece of paper in front of them, especially if they are using the list as inspiration when they go to their local seed store. This list should be very readable and usable for the consumer.
+
+_Consumer_ Goal 5: Be able to learn more about a plant with a detailed version of its entry
+
+- **Design Ideas and Choices** _How will you meet those goals in your design?_
+  - The consumer will have the option of clicking onto a plant and seeing more details about it.
+- **Rationale & Additional Notes** _Justify your decisions; additional notes._
+  - Without this feature, the consumer may be overwhelmed with unneccesary information about plants they are not interested in which would distract them from the things that are helpful to them.
 
 
 ### _Consumer_ Persona (Milestone 1)
@@ -53,7 +71,8 @@ TODO: ...
 > Create your persona using GenderMag's customizable personas.
 > Take a screenshot and include it here. Persona must be visible in Markdown Preview; do not use PDF format!
 
-TODO
+![Consumer Persona](consumerpersona.jpg)
+![Written Consumer Persona](consumerpersona_written.jpg)
 
 
 ### _Administrator_ Audience Goals (Milestone 1)
@@ -61,22 +80,33 @@ TODO
 > List each goal below. There is no specific number of goals required for this, but you need enough to do the job.
 > **DO NOT INVENT RANDOM GOALS HERE OR STEREOTYPE HERE!** Your goals are things that your users want accomplish when using the site (e.g. print a list of plants). These are informed by the Playful Plants objectives. Review the assignment's requirements for details.
 
-_Administrator_ Goal 1: TODO: Brief Title
+_Administrator_ Goal 1: Add a plant entry in the data base
 
 - **Design Ideas and Choices** _How will you meet those goals in your design?_
-  - TODO
+  - Have an admin only form to add plants to the database with inputs for all of the information that will be displayed in the database.
 - **Rationale & Additional Notes** _Justify your decisions; additional notes._
-  - TODO
+  - The administrators will need to add new plants to the database in order to keep it updated with new plants they are learning about.
 
-_Administrator_ Goal 2: TODO
+_Administrator_ Goal 2: Delete a plant entry from the database
 
-TODO
+- **Design Ideas and Choices** _How will you meet those goals in your design?_
+  - Have a button with the option to delete a specific plant entry for the admins.
+- **Rationale & Additional Notes** _Justify your decisions; additional notes._
+  - Certain plants may have to be removed due to better ones being added or due to them being out of season, etc.
 
-_Administrator_ Goal 3: TODO
+_Administrator_ Goal 3: Edit a plant entry in the database
 
-TODO
+- **Design Ideas and Choices** _How will you meet those goals in your design?_
+  - Each plant listing on the admin's end will have a button that allows you to edit the information initially inputted into that entry.
+- **Rationale & Additional Notes** _Justify your decisions; additional notes._
+  - New discoveries may arise that force the admins to update their entries in order to keep the database up to date.
 
-TODO: ...
+_Administrator_ Goal 4: Log in to the site to have access to these tasks
+
+- **Design Ideas and Choices** _How will you meet those goals in your design?_
+  - Have an optional administrator log in form accessible for anyone who opens the site. Only those with an administrator username/password combination will be allowed into the site.
+- **Rationale & Additional Notes** _Justify your decisions; additional notes._
+  - The actions that admins are allowed to do cannot be done by anyone outside of the trusted Playful Plant project team because the website could be easily hijacked/hacked by anyone without the security of a log in. It is also important that even users with good intentions do not randomly add plants in order to keep the standard of the plants in the database high.
 
 
 ### _Administrator_ Persona (Milestone 1)
@@ -84,7 +114,8 @@ TODO: ...
 > Create your persona using GenderMag's customizable personas.
 > Take a screenshot and include it here. Persona must be visible in Markdown Preview; do not use PDF format!
 
-TODO
+![Administrator Persona](adminpersona.jpg)
+![Written Administrator Persona](adminpersona_written.jpg)
 
 
 ### Site Design (Milestone 1)
@@ -105,6 +136,12 @@ _Final Design:_
 
 TODO
 
+_URLS:_
+| Route | PHP File                            |
+| ----- | ----------------------------------- |
+| /        | pages/index.php      |
+| /plants  | pages/plants.php    |
+| /log-in  | pages/login.php    |
 
 ### Design Pattern Explanation/Reflection (Milestone 1)
 > Write a one paragraph (6-8 sentences) reflection explaining how you used design patterns for media catalogs in your site's final design.
