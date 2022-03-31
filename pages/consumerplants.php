@@ -290,9 +290,9 @@ if (isset($_GET['search'])) {
     <div class="name">
     <h2><?php echo htmlspecialchars($record['plant_name']);?></h2>
     <h3><?php echo htmlspecialchars($record['species_name']);?></h3>
-    <p>Plant ID:<?php echo htmlspecialchars($record['id']);?></p>
-    <p>Tag ID: xx</p>
-    <p>Photo ID: xx</p>
+    <!-- Source: Playful Plants Project (from INFO2300 photo folder) -->
+    <img src="public/images/FL_05.jpg" alt="Temporary Image of Plant">
+    Source: <cite>Playful Plants Project</cite>
     </div>
     <div class="hor">
     <div class="play">
@@ -334,79 +334,6 @@ if (isset($_GET['search'])) {
   </li>
   <?php } ?>
 </ul>
-<?php if ($form_valid == false) {?>
-<h2>Add a plant</h2>
-<form id="plant-form" method="post" novalidate>
-<div class="formtext">
-<p id="name_feedback" class="feedback <?php echo $name_feedback; ?>">Please tell us your name</p>
-<div class="field">
-<label for="name">Your name:</label>
-<input type="text" id="name" name="name" value="<?php echo htmlspecialchars($sticky_name); ?>">
-</div>
-<p id="pname_feedback" class="feedback <?php echo $pname_feedback; ?>">Please tell us the plant's name</p>
-<div class="field">
-<label for="pname">Plant name:</label>
-<input type="text" id="pname" name="pname" value="<?php echo htmlspecialchars($sticky_pname); ?>">
-</div>
-<p id="sname_feedback" class="feedback <?php echo $sname_feedback; ?>">Please tell us the plant's species name</p>
-<div class="field">
-<label for="sname">Species name:</label>
-<input type="text" id="sname" name="sname" value="<?php echo htmlspecialchars($sticky_sname); ?>">
-</div>
-</div>
-<div class ="checkboxes">
-<div class ="checkbox">
-<input type="checkbox" id="1" name="1" value="1"<?php if ($sticky_ec == "checked") {?> checked <?php }?>>
-<label for="1">Supports Exploratory Constructive Play</label>
-</div>
-<div class ="checkbox">
-<input type="checkbox" id="2" name="2" value="2"<?php if ($sticky_es == "checked") {?> checked <?php }?>>
-<label for="2">Supports Exploratory Sensory Play</label>
-</div>
-<div class ="checkbox">
-<input type="checkbox" id="3" name="3" value="3"<?php if ($sticky_phys == "checked") {?> checked <?php }?>>
-<label for="3">Supports Physical Play</label>
-</div>
-<div class ="checkbox">
-<input type="checkbox" id="4" name="4" value="4"<?php if ($sticky_imag == "checked") {?> checked <?php }?>>
-<label for="4">Supports Imaginative Play</label>
-</div>
-<div class ="checkbox">
-<input type="checkbox" id="5" name="5" value="5"<?php if ($sticky_rest == "checked") {?> checked <?php }?>>
-<label for="5">Supports Restorative Play</label>
-</div>
-<div class ="checkbox">
-<input type="checkbox" id="6" name="6" value="6"<?php if ($sticky_exp == "checked") {?> checked <?php }?>>
-<label for="6">Supports Expressive Play</label>
-</div>
-<div class ="checkbox">
-<input type="checkbox" id="7" name="7" value="7"<?php if ($sticky_wr == "checked") {?> checked <?php }?>>
-<label for="7">Supports Play with Rules</label>
-</div>
-<div class ="checkbox">
-<input type="checkbox" id="8" name="8" value="8"<?php if ($sticky_bp == "checked") {?> checked <?php }?>>
-<label for="8">Supports Bio Play</label>
-</div>
-<div class = "describe">
-<label for="edible">What does it taste like?</label>
-<textarea id="edible" name="edible"><?php echo htmlspecialchars($sticky_edible); ?></textarea>
-<label for="scent">What does it smell like?</label>
-<textarea id="scent" name="scent"><?php echo htmlspecialchars($sticky_scent); ?></textarea>
-<label for="tactile">What does it feel like?</label>
-<textarea id="tactile" name="tactile"><?php echo htmlspecialchars($sticky_tactile); ?></textarea>
-<label for="visual">What does it look like?</label>
-<textarea id="visual" name="visual"><?php echo htmlspecialchars($sticky_visual); ?></textarea>
-</div>
-</div>
-<div class="submit">
-<input id="submit" type="submit" name="submit" value="Submit" />
-</div>
-</form>
-<?php }?>
-
-<?php if ($plant_added == true) {?>
-<p>Thank you <?php echo htmlspecialchars($name)?> for your plant submission!</p>
-<?php }?>
 </body>
 
 </html>

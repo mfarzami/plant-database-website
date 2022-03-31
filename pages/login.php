@@ -23,8 +23,20 @@
       <li><a href="/log-in">Log in</a></li>
     </ul>
 </nav>
-<h2>Error</h2>
-<p>Sorry, this page is not available!</p>
+<h2>Log in</h2>
+<form>
+<div class="field">
+<label for="username">Username:</label>
+<input type="text" id="username" name="username">
+</div>
+<div class="field">
+<label for="password">Password:</label>
+<input type="text" id="password" name="password">
+</div>
+<div class = "submit">
+<input id="login" type="submit" name="login" value="Log in" />
+</div>
+</form>
 </body>
 
 </html>

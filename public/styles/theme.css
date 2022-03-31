@@ -168,6 +168,20 @@ ul {
   display: none;
 }
 
+img {
+    height: 130px;
+}
+
+.detailimg img {
+    height: 400px;
+}
+
+.detail {
+    position: absolute;
+    left: 50%;
+    align-items: center;
+}
+
 @media print {
   nav, header, .search, form{
     display: none;

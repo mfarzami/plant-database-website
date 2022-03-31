@@ -15,7 +15,10 @@
 <nav>
     <ul>
       <li><a href="/">About</a></li>
-      <li><a href="/plants">Plants</a></li>
+      <li><a href="/plants">Admin Plants</a></li>
+      <li><a href="/consumer-plants">Consumer Plants</a></li>
+      <li><a href="/detail">Detail</a></li>
+      <li><a href="/log-in">Log in</a></li>
     </ul>
 </nav>
 <h2>About us</h2>

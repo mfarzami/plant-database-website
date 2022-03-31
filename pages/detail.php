@@ -23,8 +23,15 @@
       <li><a href="/log-in">Log in</a></li>
     </ul>
 </nav>
-<h2>Error</h2>
-<p>Sorry, this page is not available!</p>
+<div class = "detail">
+<h2>Feather reed grass</h2>
+<p>Calamagrostis x acutiflora</p>
+<div class = "detailimg">
+<!-- Source: Playful Plants Project (from INFO2300 photo folder) -->
+<img src="public/images/FL_05.jpg" alt="Temporary Image of Plant">
+</div>
+Source: <cite>Playful Plants Project</cite>
+</div>
 </body>
 
 </html>
