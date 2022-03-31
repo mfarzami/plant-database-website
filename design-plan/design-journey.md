@@ -230,29 +230,65 @@ Table: users
 > Plan _all_ of your database queries. You may use natural language, pseudocode, or SQL.
 
 ```
-TODO: Plan a query
+Log in query:
+SELECT * FROM users WHERE (username == [variable for inputted username] && password == [variable for inputted password])
 ```
 
 ```
-TODO: Plan another query
+Delete entry query:
+DELETE * FROM plants WHERE (plant_id == [variable for id on clicked on entry])
 ```
 
-TODO: ...
+```
+Edit entry query:
+UPDATE plants SET
+  [variable for chosen to update] = [variable for value];
+  WHERE (plant_id == [variable for id for entry chosen to edit])
+```
 
+```
+Add query:
+Done in project 2
+```
+
+```
+Filter query:
+Done in project 2
+```
+
+```
+Sort query:
+Done in project 2
+```
 
 ### Code Planning (Milestone 1, Milestone 2, Milestone 3, Final Submission)
 > Plan any PHP code you'll need here using pseudocode.
 > Tip: Break this up by pages. It makes it easier to plan.
 
 ```
-TODO: WRITE YOUR PSEUDOCODE HERE, between the back-tick lines.
+Log in PHP:
+if form submitted
+  if SQL query for username and password is in the users table
+    show html code for admin side of plants.php
+    show "log out" instead of "log in"
+  else
+    show feedback class
 ```
 
 ```
-TODO: WRITE MORE PSEUDOCODE HERE, between the back-tick lines.
+Delete PHP:
+if link to delete clicked
+  store plant_id in PHP variable
+  execute SQL delete query
 ```
 
-TODO: ...
+```
+Edit PHP:
+if link to edit clicked
+  store plant_id in PHP variable
+  store updated values in PHP variables
+  execute SQL edit query with those values
+```
 
 
 ### Accessibility Audit (Final Submission)
