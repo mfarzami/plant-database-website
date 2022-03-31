@@ -184,6 +184,8 @@ Skye will have an obvious place to log into the admin part of the site, in the n
 Table: plants
 
 - id: INT {NN, PK, U, AI}
+- tag_id: INT {NN, PK, U}
+- image_id: INT {NN, PK, U}
 - plant_name: TEXT {NN}
 - species_name: TEXT {NN}
 - is_exploratoryconstructive: INT {NN}
@@ -195,6 +197,34 @@ Table: plants
 - is_withrules: INT {NN}
 - is_bioplay: INT {NN}
 
+Table: tags
+
+- id: INT {NN, PK, U, AI}
+- plant_id: INT {NN, PK, U}
+- is_perennial: INT {NN}
+- is_annual: INT {NN}
+- is_fullsun: INT {NN}
+- is_partialshade: INT {NN}
+- is_fullshade: INT {NN}
+- is_shrub: INT {NN}
+- is_grass: INT {NN}
+- is_vine: INT {NN}
+- is_tree: INT {NN}
+- is_flower: INT {NN}
+- is_groundcovers: INT {NN}
+- is_other: INT {NN}
+
+Table: images
+
+- id: INT {NN, PK, U, AI}
+- plant_id: INT {NN, PK, U}
+- file_name: TEXT {NN}
+
+Table: users
+
+- id: INT {NN, PK, U, AI}
+- username: TEXT {NN, U}
+- password: TEXT {NN, U, PK}
 
 ### Database Query Plan (Milestone 1, Milestone 2, Milestone 3, Final Submission)
 > Plan _all_ of your database queries. You may use natural language, pseudocode, or SQL.
