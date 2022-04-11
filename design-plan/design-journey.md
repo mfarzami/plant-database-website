@@ -226,6 +226,55 @@ Table: users
 - username: TEXT {NN, U}
 - password: TEXT {NN, U, PK}
 
+_Added in milestone 2 to follow feedback:_
+
+I realized that I had unneccesarily fields to some of the tables. Instead, I deleted these repetitive fields and replaced them with a "relationships" table that can connect plants to multiple tags (before it would only give a plant one tag). I also realized since each plant only has one image, there is no reason to have a seperate table for images so I got rid of that and added the file_name field to the plants table.
+
+The new schema I came up with to implement is below:
+
+Table: relationships
+
+- id: INT {NN, PK, U, AI}
+- tag_id: INT {NN, PK, U}
+- plant_id: INT {NN, PK, U}
+
+Table: plants
+
+- id: INT {NN, PK, U, AI}
+- file_name: TEXT {NN}
+- plant_name: TEXT {NN}
+- species_name: TEXT {NN}
+- is_exploratoryconstructive: INT {NN}
+- is_exploratorysensory: INT {NN}
+- is_physical: INT {NN}
+- is_imaginative: INT {NN}
+- is_restorative: INT {NN}
+- is_expressive: INT {NN}
+- is_withrules: INT {NN}
+- is_bioplay: INT {NN}
+
+Table: tags
+
+- id: INT {NN, PK, U, AI}
+- is_perennial: INT {NN}
+- is_annual: INT {NN}
+- is_fullsun: INT {NN}
+- is_partialshade: INT {NN}
+- is_fullshade: INT {NN}
+- is_shrub: INT {NN}
+- is_grass: INT {NN}
+- is_vine: INT {NN}
+- is_tree: INT {NN}
+- is_flower: INT {NN}
+- is_groundcovers: INT {NN}
+- is_other: INT {NN}
+
+Table: users
+
+- id: INT {NN, PK, U, AI}
+- username: TEXT {NN, U}
+- password: TEXT {NN, U, PK}
+
 ### Database Query Plan (Milestone 1, Milestone 2, Milestone 3, Final Submission)
 > Plan _all_ of your database queries. You may use natural language, pseudocode, or SQL.
 
