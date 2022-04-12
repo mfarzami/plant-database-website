@@ -2,8 +2,8 @@
 
  CREATE TABLE `plants` (
  	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-	`file_name`	TEXT NOT NULL
- 	`plant_name`	TEXT NOT NULL,
+	`file_name`	TEXT NOT NULL,
+ 	`plant_name` TEXT NOT NULL,
  	`species_name`	TEXT NOT NULL
  );
 
@@ -15,13 +15,13 @@
  CREATE TABLE `users` (
  	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
  	`username`	TEXT NOT NULL UNIQUE,
- 	`password`	TEXT NOT NULL PRIMARY KEY UNIQUE
+ 	`password`	TEXT NOT NULL UNIQUE
  );
 
  CREATE TABLE `relationships` (
  	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-  `plant_id`	INTEGER NOT NULL PRIMARY KEY UNIQUE,
- 	`tag_id`	INTEGER NOT NULL PRIMARY KEY UNIQUE,
+  `plant_id`	INTEGER NOT NULL,
+ 	`tag_id`	INTEGER NOT NULL
  );
 
 -- TODO: initial seed data
@@ -82,7 +82,8 @@
 
  INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (1, 1, 2);
  INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (2, 1, 3);
- INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (3, 1, 4); INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (4, 1, 8);
+ INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (3, 1, 4);
+ INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (4, 1, 8);
  INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (5, 1, 9);
  INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (6, 1, 12);
  INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (7, 1, 13);
@@ -90,14 +91,16 @@
 
  INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (9, 2, 2);
  INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (10, 2, 3);
- INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (11, 2, 1); INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (12, 2, 8);
+ INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (11, 2, 1);
+ INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (12, 2, 8);
  INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (13, 2, 9);
  INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (14, 2, 11);
  INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (16, 2, 15);
 
  INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (17, 3, 2);
  INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (18, 3, 3);
- INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (19, 3, 4); INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (20, 3, 8);
+ INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (19, 3, 4);
+ INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (20, 3, 8);
  INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (21, 3, 9);
  INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (22, 3, 12);
  INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (23, 3, 13);
@@ -106,14 +109,15 @@
  INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (25, 4, 2);
  INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (26, 4, 4);
  INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (27, 4, 9);
- INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (27, 4, 11);
+ INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (15, 4, 11);
  INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (28, 4, 12);
  INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (29, 4, 13);
  INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (30, 4, 20);
 
  INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (31, 5, 2);
  INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (32, 5, 3);
- INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (33, 5, 4); INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (34, 5, 8);
+ INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (33, 5, 4);
+ INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (34, 5, 8);
  INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (35, 5, 9);
  INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (36, 5, 12);
  INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (37, 5, 13);
@@ -132,7 +136,8 @@
  INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (48, 7, 2);
  INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (49, 7, 3);
  INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (50, 7, 4);
- INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (51, 7, 7);INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (52, 7, 8);
+ INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (51, 7, 7);
+ INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (52, 7, 8);
  INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (53, 7, 9);
  INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (54, 7, 11);
  INSERT INTO `relationships` (id, plant_id, tag_id) VALUES (55, 7, 14);

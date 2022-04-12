@@ -2,7 +2,7 @@
 <html lang="en">
 
 <?php
-$db = open_sqlite_db('tmp/site.sqlite');
+$db = init_sqlite_db('db/site.sqlite', 'db/init.sql');
 $result = exec_sql_query($db, 'SELECT * FROM plants;');
 $records = $result->fetchAll();
 
