@@ -26,37 +26,37 @@
 
 -- TODO: initial seed data
 
- INSERT INTO `plants` (id, file_name, plant_name, species_name) VALUES (1, 'file_placeholder', 'Lungwort', 'Pulmonaria lingifolia');
+ INSERT INTO `plants` (id, file_name, plant_name, species_name) VALUES (1, 'GR_13', 'Lungwort', 'Pulmonaria lingifolia');
 
- INSERT INTO `plants` (id, file_name, plant_name, species_name) VALUES (2, 'file_placeholder', 'Yarrow', 'Achillea millefolium');
+ INSERT INTO `plants` (id, file_name, plant_name, species_name) VALUES (2, 'GA_17', 'Yarrow', 'Achillea millefolium');
 
- INSERT INTO `plants` (id, file_name, plant_name, species_name) VALUES (3, 'file_placeholder', 'Black cohosh', 'Actaea racemosa');
+ INSERT INTO `plants` (id, file_name, plant_name, species_name) VALUES (3, 'FL_24', 'Black cohosh', 'Actaea racemosa');
 
- INSERT INTO `plants` (id, file_name, plant_name, species_name) VALUES (4, 'file_placeholder', 'Cinnamon Fern', 'Osmunda cinnamomea');
+ INSERT INTO `plants` (id, file_name, plant_name, species_name) VALUES (4, 'FE_05', 'Cinnamon Fern', 'Osmunda cinnamomea');
 
- INSERT INTO `plants` (id, file_name, plant_name, species_name) VALUES (5, 'file_placeholder', 'Astilbe', 'Astilbe spp.');
+ INSERT INTO `plants` (id, file_name, plant_name, species_name) VALUES (5, 'FE_05', 'Astilbe', 'Astilbe spp.');
 
- INSERT INTO `plants` (id, file_name, plant_name, species_name) VALUES (6, 'file_placeholder', 'American Hogpeanut', 'Amphicarpea bracteata');
+ INSERT INTO `plants` (id, file_name, plant_name, species_name) VALUES (6, 'VI_08', 'American Hogpeanut', 'Amphicarpea bracteata');
 
- INSERT INTO `plants` (id, file_name, plant_name, species_name) VALUES (7, 'file_placeholder', 'Dwarf Everbearing Mulberry', 'Morus nigra');
+ INSERT INTO `plants` (id, file_name, plant_name, species_name) VALUES (7, 'SH_17', 'Dwarf Everbearing Mulberry', 'Morus nigra');
 
- INSERT INTO `plants` (id, file_name, plant_name, species_name) VALUES (8, 'file_placeholder', 'Sweet Woodruff', 'Galium odoratum');
+ INSERT INTO `plants` (id, file_name, plant_name, species_name) VALUES (8, 'GR_11', 'Sweet Woodruff', 'Galium odoratum');
 
- INSERT INTO `plants` (id, file_name, plant_name, species_name) VALUES (9, 'file_placeholder', 'Cornelian Cherry', 'Cornus mas');
+ INSERT INTO `plants` (id, file_name, plant_name, species_name) VALUES (9, 'TR_13', 'Cornelian Cherry', 'Cornus mas');
 
- INSERT INTO `plants` (id, file_name, plant_name, species_name) VALUES (10, 'file_placeholder', 'Bigroot Geranium', 'Geranium macrorrhizum');
+ INSERT INTO `plants` (id, file_name, plant_name, species_name) VALUES (10, 'GR_01', 'Bigroot Geranium', 'Geranium macrorrhizum');
 
- INSERT INTO `plants` (id, file_name, plant_name, species_name) VALUES (11, 'file_placeholder', 'Eastern Hemlock', 'Tsuga canadensis');
+ INSERT INTO `plants` (id, file_name, plant_name, species_name) VALUES (11, 'TR_24', 'Eastern Hemlock', 'Tsuga canadensis');
 
- INSERT INTO `plants` (id, file_name, plant_name, species_name) VALUES (12, 'file_placeholder', 'Chokeberry', 'Aronia melanocarpa');
+ INSERT INTO `plants` (id, file_name, plant_name, species_name) VALUES (12, 'SH_26', 'Chokeberry', 'Aronia melanocarpa');
 
- INSERT INTO `plants` (id, file_name, plant_name, species_name) VALUES (13, 'file_placeholder', 'Purple lovegrass', 'Eragrostis spectabilis');
+ INSERT INTO `plants` (id, file_name, plant_name, species_name) VALUES (13, 'GA_11', 'Purple lovegrass', 'Eragrostis spectabilis');
 
- INSERT INTO `plants` (id, file_name, plant_name, species_name) VALUES (14, 'file_placeholder', 'Little False Bluestem', 'Schizachyrum scoparium');
+ INSERT INTO `plants` (id, file_name, plant_name, species_name) VALUES (14, 'GA_09', 'Little False Bluestem', 'Schizachyrum scoparium');
 
- INSERT INTO `plants` (id, file_name, plant_name, species_name) VALUES (15, 'file_placeholder', 'Jacob''s ladder', 'Polemonium retptans');
+ INSERT INTO `plants` (id, file_name, plant_name, species_name) VALUES (15, 'GR_19', 'Jacob''s ladder', 'Polemonium retptans');
 
- INSERT INTO `plants` (id, file_name, plant_name, species_name) VALUES (16, 'file_placeholder', 'Prairie Dropseed', 'Sporobolus heterolepis');
+ INSERT INTO `plants` (id, file_name, plant_name, species_name) VALUES (16, 'GA_18', 'Prairie Dropseed', 'Sporobolus heterolepis');
 
 
  INSERT INTO `tags` (id, tag) VALUES (1, 'EC');
