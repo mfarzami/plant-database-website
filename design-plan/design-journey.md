@@ -228,7 +228,7 @@ Table: users
 
 _Added in milestone 2 to follow feedback:_
 
-I realized that I had unneccesarily fields to some of the tables. Instead, I deleted these repetitive fields and replaced them with a "relationships" table that can connect plants to multiple tags (before it would only give a plant one tag). I also realized since each plant only has one image, there is no reason to have a seperate table for images so I got rid of that and added the file_name field to the plants table.
+I realized that I had unneccesarily fields to some of the tables. Instead, I deleted these repetitive fields and replaced them with a "relationships" table that can connect plants to multiple tags (before it would only give a plant one tag). I also realized since each plant only has one image, there is no reason to have a seperate table for images so I got rid of that and added the file_name field to the plants table. In addition, I realized that playtypes can be a type of tag. When I went to add all the playtypes to the tags table, I realized that there is no reason for there to be a table with so many columns with boolean values. Instead, it could just have a tag column with all of the playtypes and other tags in it.
 
 The new schema I came up with to implement is below:
 
@@ -244,30 +244,11 @@ Table: plants
 - file_name: TEXT {NN}
 - plant_name: TEXT {NN}
 - species_name: TEXT {NN}
-- is_exploratoryconstructive: INT {NN}
-- is_exploratorysensory: INT {NN}
-- is_physical: INT {NN}
-- is_imaginative: INT {NN}
-- is_restorative: INT {NN}
-- is_expressive: INT {NN}
-- is_withrules: INT {NN}
-- is_bioplay: INT {NN}
 
 Table: tags
 
 - id: INT {NN, PK, U, AI}
-- is_perennial: INT {NN}
-- is_annual: INT {NN}
-- is_fullsun: INT {NN}
-- is_partialshade: INT {NN}
-- is_fullshade: INT {NN}
-- is_shrub: INT {NN}
-- is_grass: INT {NN}
-- is_vine: INT {NN}
-- is_tree: INT {NN}
-- is_flower: INT {NN}
-- is_groundcovers: INT {NN}
-- is_other: INT {NN}
+- tag: TEXT {NN, U}
 
 Table: users
 
