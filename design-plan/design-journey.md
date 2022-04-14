@@ -291,6 +291,14 @@ Sort query:
 Done in project 2
 ```
 
+```
+Join query:
+SELECT * FROM relationships
+  INNER JOIN plants on
+  (relationships.plant_id = plants.id) INNER JOIN
+  tags on (relationships.tag_id = tags.id)
+```
+
 ### Code Planning (Milestone 1, Milestone 2, Milestone 3, Final Submission)
 > Plan any PHP code you'll need here using pseudocode.
 > Tip: Break this up by pages. It makes it easier to plan.

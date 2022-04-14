@@ -7,7 +7,13 @@ ini_set('display_errors', 1);
 
 $db = init_sqlite_db('db/site.sqlite', 'db/init.sql');
 $result = exec_sql_query($db, 'SELECT * FROM plants;');
+$tagresult = exec_sql_query($db, 'SELECT * FROM tags;');
+$relationshipsresult = exec_sql_query($db, 'SELECT * FROM relationships;');
+$usersresult = exec_sql_query($db, 'SELECT * FROM users;');
 $records = $result->fetchAll();
+$tagrecords = $tagresult->fetchAll();
+$relationshipsrecords = $relationshipsresult->fetchAll();
+$usersrecords = $usersresult->fetchAll();
 
 //default feedback classes as hidden
 $name_feedback = 'hidden';
@@ -294,8 +300,8 @@ if (isset($_GET['search'])) {
     <h2><?php echo htmlspecialchars($record['plant_name']);?></h2>
     <h3><?php echo htmlspecialchars($record['species_name']);?></h3>
     <p>Plant ID:<?php echo htmlspecialchars($record['id']);?></p>
-    <p>Tag ID: xx</p>
-    <p>Photo ID: xx</p>
+    <p>Tag ID:xx</p>
+    <p>Photo ID:<?php echo htmlspecialchars($record['file_name']);?></p>
     </div>
     <div class="hor">
     <div class="play">
