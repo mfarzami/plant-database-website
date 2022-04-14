@@ -6,14 +6,11 @@
 ini_set('display_errors', 1);
 
 $db = init_sqlite_db('db/site.sqlite', 'db/init.sql');
-$result = exec_sql_query($db, 'SELECT * FROM plants;');
-$tagresult = exec_sql_query($db, 'SELECT * FROM tags;');
-$relationshipsresult = exec_sql_query($db, 'SELECT * FROM relationships;');
-$usersresult = exec_sql_query($db, 'SELECT * FROM users;');
+$result = exec_sql_query($db, 'SELECT * FROM (relationships
+INNER JOIN plants ON
+(relationships.plant_id = plants.id)) INNER JOIN
+tags ON (relationships.tag_id = tags.id);');
 $records = $result->fetchAll();
-$tagrecords = $tagresult->fetchAll();
-$relationshipsrecords = $relationshipsresult->fetchAll();
-$usersrecords = $usersresult->fetchAll();
 
 //default feedback classes as hidden
 $name_feedback = 'hidden';
@@ -300,42 +297,46 @@ if (isset($_GET['search'])) {
     <h2><?php echo htmlspecialchars($record['plant_name']);?></h2>
     <h3><?php echo htmlspecialchars($record['species_name']);?></h3>
     <p>Plant ID:<?php echo htmlspecialchars($record['id']);?></p>
-    <p>Tag ID:xx</p>
     <p>Photo ID:<?php echo htmlspecialchars($record['file_name']);?></p>
+    <div class="details">
+    <form action ="/detail">
+      <input type="submit" value="Details"/>
+    </form>
+    </div>
     </div>
     <div class="hor">
     <div class="play">
     <div class="blurb">
     <h4>Exploratory Constructive Play</h4>
-    <h5><?php if ($record['is_exploratoryconstructive'] == 1) {?>Yes<?php } else { ?>No<?php }?></h5>
+    <h5>Yes</h5>
     </div>
     <div class="blurb">
     <h4>Exploratory Sensory Play</h4>
-    <h5><?php if ($record['is_exploratorysensory'] == 1) {?>Yes<?php } else { ?>No<?php }?></h5>
+    <h5>Yes</h5>
     </div>
     <div class="blurb">
     <h4>Physical Play</h4>
-    <h5><?php if ($record['is_physical'] == 1) {?>Yes<?php } else { ?>No<?php }?></h5>
+    <h5>Yes</h5>
     </div>
     <div class="blurb">
     <h4>Imaginative Play</h4>
-    <h5><?php if ($record['is_imaginative'] == 1) {?>Yes<?php } else { ?>No<?php }?></h5>
+    <h5>Yes</h5>
     </div>
     <div class="blurb">
     <h4>Restorative Play</h4>
-    <h5><?php if ($record['is_restorative'] == 1) {?>Yes<?php } else { ?>No<?php }?></h5>
+    <h5>Yes</h5>
     </div>
     <div class="blurb">
     <h4>Expressive Play</h4>
-    <h5><?php if ($record['is_expressive'] == 1) {?>Yes<?php } else { ?>No<?php }?></h5>
+    <h5>Yes</h5>
     </div>
     <div class="blurb">
     <h4>Play with Rules</h4>
-    <h5><?php if ($record['is_withrules'] == 1) {?>Yes<?php } else { ?>No<?php }?></h5>
+    <h5>Yes</h5>
     </div>
     <div class="blurb">
     <h4>Bio Play</h4>
-    <h5><?php if ($record['is_bioplay'] == 1) {?>Yes<?php } else { ?>No<?php }?></h5>
+    <h5>Yes</h5>
     </div>
     </div>
     </div>

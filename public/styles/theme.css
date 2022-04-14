@@ -182,6 +182,11 @@ img {
     align-items: center;
 }
 
+.detailbutton {
+
+
+}
+
 @media print {
   nav, header, .search, form{
     display: none;
