@@ -148,6 +148,10 @@ Then I sketched the adminstrator view (on a laptop screen). Their database is di
 
 Here I seperately sketched out the edit/delete features of the site. I decided having links with straightforward words on them would be better than icons to support Skye's wish to have self explanatory technology and also better than buttons to support avoiding an excess of "submit" buttons regarding catalog design ideals.
 
+![Edit page sketch](editpage.jpg)
+
+I added this sketch in milestone 3 to plan the edit page for each entry. It will have a form where the admins can update anything they want and then a button that clearly states "update", which brings you back to the database to continue browsing. Skye will know exactly how to use the page since she is familiar with forms and it will automatically save her update and return her to the database with one click. The main page will also notify her that the listing was updated to assure her that her action worked.
+
 _URLS:_
 | Route | PHP File                            |
 | ----- | ----------------------------------- |
@@ -297,21 +301,23 @@ SELECT * FROM relationships
   INNER JOIN plants on
   (relationships.plant_id = plants.id) INNER JOIN
   tags on (relationships.tag_id = tags.id);
+
+Note in milestone 3: I thought I would use this query in the beginning to display the data, but then I realized I actually used this for filtering to filter by the tag_id in my tags table.
 ```
 
 ```
 Delete query:
-DELETE FROM plants WHERE plants.id = [variable from hidden input to get id];
+DELETE FROM plants WHERE id = [variable from hidden input to get id];
 ```
 
 ```
 Edit query:
-//
+UPDATE plants SET ([variable of field] = [variable of new field content] WHERE id = [variable from hidden input to get id]);
 ```
 
 ```
 Tag query:
-//
+UPDATE plants SET ([variable of tag] = [variable of new tag setting - whether it has it or not] WHERE id = [variable from hidden input to get id]);
 ```
 
 ### Code Planning (Milestone 1, Milestone 2, Milestone 3, Final Submission)

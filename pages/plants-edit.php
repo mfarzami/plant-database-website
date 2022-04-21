@@ -10,6 +10,8 @@ $edit_id = $_GET['edit_id'];
 $db = init_sqlite_db('db/site.sqlite', 'db/init.sql');
 $result = exec_sql_query($db, "SELECT * FROM plants WHERE (id = $edit_id); ");
 $records = $result->fetchAll();
+//$tags = exec_sql_query($db, 'SELECT * FROM tags WHERE (id = $edit_id); ');
+//$tagrecords = $tags->fetchAll();
 ?>
 
 <head>
@@ -49,4 +51,11 @@ $records = $result->fetchAll();
     </div>
 </form>
 <?php }?>
+<?php //foreach($tagrecords as $tag) { ?>
+<form>
+    <div class = "editform">
+    <input type="text" id="file_id" name="file">
+    </div>
+</form>
+<?php // }?>
 </body>

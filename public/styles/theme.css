@@ -186,6 +186,10 @@ img {
   display: grid;
 }
 
+.tag {
+
+}
+
 @media print {
   nav, header, .search, form{
     display: none;

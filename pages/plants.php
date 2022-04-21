@@ -6,10 +6,6 @@
 ini_set('display_errors', 1);
 
 $db = init_sqlite_db('db/site.sqlite', 'db/init.sql');
-// $result = exec_sql_query($db, 'SELECT * FROM (plants
-// INNER JOIN relationships ON
-// (relationships.plant_id = plants.id)) INNER JOIN
-// tags ON (relationships.tag_id = tags.id);');
 $result = exec_sql_query($db, 'SELECT * FROM plants; ');
 $tags = exec_sql_query($db, 'SELECT * FROM tags; ');
 $records = $result->fetchAll();
@@ -92,7 +88,7 @@ if (isset($_POST['submit'])) {
 
 if ($form_valid) {
   //add inputs to database if form went through
-  $result = exec_sql_query($db, "INSERT INTO plants (plant_name, species_name, is_exploratoryconstructive, is_exploratorysensory, is_physical, is_imaginative, is_restorative, is_expressive, is_withrules, is_bioplay, edible, scent, tactile, visualinterest) VALUES ('$pname', '$sname', '$ec', '$es', '$phys', '$imag', '$rest', '$exp', '$wr', '$bp', '$edible', '$scent', '$tactile', '$visual')");
+  $result = exec_sql_query($db, "INSERT INTO plants (plant_name, species_name, file_name) VALUES ('$pname', '$sname', 'test')");
 
   //plant has been added
   if ($result) {
@@ -175,7 +171,10 @@ if (isset($_GET['search'])) {
 }
 
   //create variables for query parts
-  $select_part = "SELECT * FROM plants ";
+  $select_part = 'SELECT * FROM (plants
+  INNER JOIN relationships ON
+  (relationships.plant_id = plants.id)) INNER JOIN
+  tags ON (relationships.tag_id = tags.id);';
   $where_part = "";
   $order_part = "";
   $filter_part = array();
@@ -211,35 +210,83 @@ if (isset($_GET['search'])) {
 
   //add filters to array
   if ($con) {
-    array_push($filter_part, "(is_exploratoryconstructive = 1)");
+    array_push($filter_part, "(tag_id = 1)");
   }
 
   if ($sens) {
-    array_push($filter_part, "(is_exploratorysensory = 1)");
+    array_push($filter_part, "(tag_id = 2)");
   }
 
   if ($ph) {
-    array_push($filter_part, "(is_physical = 1)");
+    array_push($filter_part, "(tag_id = 3)");
   }
 
   if ($im) {
-    array_push($filter_part, "(is_imaginative = 1)");
+    array_push($filter_part, "(tag_id = 4)");
   }
 
   if ($res) {
-    array_push($filter_part, "(is_restorative = 1)");
+    array_push($filter_part, "(tag_id = 5)");
   }
 
   if ($expr) {
-    array_push($filter_part, "(is_expressive = 1)");
+    array_push($filter_part, "(tag_id = 6)");
   }
 
   if ($rules) {
-    array_push($filter_part, "(is_withrules = 1)");
+    array_push($filter_part, "(tag_id = 7)");
   }
 
   if ($bio) {
-    array_push($filter_part, "(is_bioplay = 1)");
+    array_push($filter_part, "(tag_id = 8)");
+  }
+
+  if ($perennial) {
+    array_push($filter_part, "(tag_id = 9)");
+  }
+
+  if ($annual) {
+    array_push($filter_part, "(tag_id = 10)");
+  }
+
+  if ($fulls) {
+    array_push($filter_part, "(tag_id = 11)");
+  }
+
+  if ($partials) {
+    array_push($filter_part, "(tag_id = 12)");
+  }
+
+  if ($fullsh) {
+    array_push($filter_part, "(tag_id = 13)");
+  }
+
+  if ($shr) {
+    array_push($filter_part, "(tag_id = 14)");
+  }
+
+  if ($gra) {
+    array_push($filter_part, "(tag_id = 15)");
+  }
+
+  if ($vin) {
+    array_push($filter_part, "(tag_id = 16)");
+  }
+
+  if ($tre) {
+    array_push($filter_part, "(tag_id = 17)");
+  }
+
+  if ($flo) {
+    array_push($filter_part, "(tag_id = 18)");
+  }
+
+  if ($gro) {
+    array_push($filter_part, "(tag_id = 19)");
+  }
+
+  if ($oth) {
+    array_push($filter_part, "(tag_id = 20)");
   }
 
   if (count($filter_part) != 0) {
@@ -363,7 +410,7 @@ if (isset($_GET['search'])) {
 <p>Thank you <?php echo htmlspecialchars($name)?> for your plant submission!</p>
 <?php }?>
 <ul>
-  <?php foreach($records as $record) { ?>
+<?php foreach($records as $record) { ?>
   <li>
     <div class="plant">
     <div class="name">
@@ -386,15 +433,11 @@ if (isset($_GET['search'])) {
     </form>
     </div>
     </div>
-    <?php } ?>
-    <?php foreach($tagrecords as $tag) { ?>
     <div class="hor">
     <h3>This plant supports:</h3>
     <div class="play">
     <div class="blurb">
-    <?php //if ($record['tag_id'] == 1) {?>
     <h4>Exploratory Constructive Play</h4>
-    <?php //}?>
     </div>
     <div class="blurb">
     <h4>Exploratory Sensory Play</h4>
@@ -461,9 +504,10 @@ if (isset($_GET['search'])) {
     </div>
     </div>
     </div>
-    </div>
-    <?php } ?>
+  </div>
   </li>
+  <?php } ?>
+  <?php //} ?>
 </ul>
 <?php if ($form_valid == false) {?>
 <h2>Add a plant</h2>
