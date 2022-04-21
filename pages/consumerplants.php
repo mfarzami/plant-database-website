@@ -246,7 +246,6 @@ if (isset($_GET['search'])) {
       <li><a href="/">About</a></li>
       <li><a href="/plants">Admin Plants</a></li>
       <li><a href="/consumer-plants">Consumer Plants</a></li>
-      <li><a href="/detail">Detail</a></li>
       <li><a href="/log-in">Log in</a></li>
     </ul>
 </nav>
@@ -270,6 +269,32 @@ if (isset($_GET['search'])) {
 <label for="rules">With Rules</label>
 <input type="checkbox" id="bio" name="bio" value="bio"<?php if ($sticky_bio == "checked") {?> checked <?php }?>>
 <label for="bio">Bio</label>
+<p><em>Filter the database by growing needs and characteristics:</em></p>
+<input type="checkbox" id="perennial" name="perennial" value="perennial"<?php if ($sticky_perennial == "checked") {?> checked <?php }?>>
+<label for="per">Perennial</label>
+<input type="checkbox" id="annual" name="annual" value="annual"<?php if ($sticky_annual == "checked") {?> checked <?php }?>>
+<label for="annual">Annual</label>
+<input type="checkbox" id="fulls" name="fulls" value="fulls"<?php if ($sticky_fulls == "checked") {?> checked <?php }?>>
+<label for="fulls">Full Sun</label>
+<input type="checkbox" id="partials" name="partials" value="partials"<?php if ($sticky_partials == "checked") {?> checked <?php }?>>
+<label for="partials">Partial Shade</label>
+<input type="checkbox" id="fullsh" name="fullsh" value="fullsh"<?php if ($sticky_fullsh == "checked") {?> checked <?php }?>>
+<label for="fullsh">Full Shade</label>
+<p><em>Filter the database by general classification:</em></p>
+<input type="checkbox" id="shr" name="shr" value="shr"<?php if ($sticky_shr == "checked") {?> checked <?php }?>>
+<label for="shr">Shrub</label>
+<input type="checkbox" id="gra" name="gra" value="gra"<?php if ($sticky_gra == "checked") {?> checked <?php }?>>
+<label for="gra">Grass</label>
+<input type="checkbox" id="vin" name="vin" value="vin"<?php if ($sticky_vin == "checked") {?> checked <?php }?>>
+<label for="vin">Vine</label>
+<input type="checkbox" id="tre" name="tre" value="tre"<?php if ($sticky_tre == "checked") {?> checked <?php }?>>
+<label for="tre">Tree</label>
+<input type="checkbox" id="flo" name="flo" value="flo"<?php if ($sticky_flo == "checked") {?> checked <?php }?>>
+<label for="flo">Flower</label>
+<input type="checkbox" id="gro" name="gro" value="gro"<?php if ($sticky_gro == "checked") {?> checked <?php }?>>
+<label for="gro">Groundcovers</label>
+<input type="checkbox" id="oth" name="oth" value="oth"<?php if ($sticky_oth == "checked") {?> checked <?php }?>>
+<label for="oth">Other</label>
 <div class = "button">
 <p><em>Sort the database:</em></p>
 <form>

@@ -296,7 +296,22 @@ Join query:
 SELECT * FROM relationships
   INNER JOIN plants on
   (relationships.plant_id = plants.id) INNER JOIN
-  tags on (relationships.tag_id = tags.id)
+  tags on (relationships.tag_id = tags.id);
+```
+
+```
+Delete query:
+DELETE FROM plants WHERE plants.id = [variable from hidden input to get id];
+```
+
+```
+Edit query:
+//
+```
+
+```
+Tag query:
+//
 ```
 
 ### Code Planning (Milestone 1, Milestone 2, Milestone 3, Final Submission)

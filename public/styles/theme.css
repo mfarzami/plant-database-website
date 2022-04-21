@@ -24,7 +24,7 @@ h1 {
 .plant {
   display: inline-flex;
   background-color: rgb(207, 241, 214);
-  width: 1050px;
+  width: 1150px;
   margin-bottom: 30px;
   line-height: 100%;
   height: 250px;
@@ -64,6 +64,12 @@ h1 {
   display: flex;
   flex-direction: column;
   height: 100px;
+  margin-right: 150px;
+}
+
+.hor h3 {
+  line-height: 0pt;
+  margin-bottom: 0pt;
 }
 
 .plant .play {
@@ -149,12 +155,6 @@ ul {
 .checkboxes {
   padding-top: 20px;
 }
-.describe {
-  padding-top: 20px;
-  display: flex;
-  flex-direction: column;
-  width: 300px;
-}
 
 .submit {
   margin-top: 20px;
@@ -182,9 +182,8 @@ img {
     align-items: center;
 }
 
-.detailbutton {
-
-
+.editform {
+  display: grid;
 }
 
 @media print {

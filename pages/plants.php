@@ -6,11 +6,14 @@
 ini_set('display_errors', 1);
 
 $db = init_sqlite_db('db/site.sqlite', 'db/init.sql');
-$result = exec_sql_query($db, 'SELECT * FROM (relationships
-INNER JOIN plants ON
-(relationships.plant_id = plants.id)) INNER JOIN
-tags ON (relationships.tag_id = tags.id);');
+// $result = exec_sql_query($db, 'SELECT * FROM (plants
+// INNER JOIN relationships ON
+// (relationships.plant_id = plants.id)) INNER JOIN
+// tags ON (relationships.tag_id = tags.id);');
+$result = exec_sql_query($db, 'SELECT * FROM plants; ');
+$tags = exec_sql_query($db, 'SELECT * FROM tags; ');
 $records = $result->fetchAll();
+$tagrecords = $tags->fetchAll();
 
 //default feedback classes as hidden
 $name_feedback = 'hidden';
@@ -19,23 +22,6 @@ $sname_feedback = 'hidden';
 
 //default insertion for add plant as false
 $plant_added = false;
-
-//making sticky variables for add form
-$sticky_name = '';
-$sticky_pname = '';
-$sticky_sname = '';
-$sticky_ec = '';
-$sticky_es = '';
-$sticky_phys = '';
-$sticky_imag = '';
-$sticky_rest = '';
-$sticky_exp = '';
-$sticky_wr = '';
-$sticky_bp = '';
-$sticky_edible = '';
-$sticky_scent = '';
-$sticky_tactile = '';
-$sticky_visual = '';
 
 //making variables for add form inputs
 $name = NULL;
@@ -56,6 +42,7 @@ $visual = NULL;
 
 //initializing form_valid as false
 $form_valid = false;
+$deleted = false;
 
 //if add form is submitted take inputs into variables
 if (isset($_POST['submit'])) {
@@ -72,10 +59,19 @@ if (isset($_POST['submit'])) {
   $exp = empty($_POST['6'])? 0:1;
   $wr = empty($_POST['7'])? 0:1;
   $bp = empty($_POST['8'])? 0:1;
-  $edible = $_POST['edible'];
-  $scent = $_POST['scent'];
-  $tactile = $_POST['tactile'];
-  $visual = $_POST['visual'];
+  $per = empty($_POST['9'])? 0:1;
+  $ann = empty($_POST['10'])? 0:1;
+  $fullsun = empty($_POST['11'])? 0:1;
+  $partial = empty($_POST['12'])? 0:1;
+  $fullshade = empty($_POST['13'])? 0:1;
+  $shrub = empty($_POST['14'])? 0:1;
+  $grass = empty($_POST['15'])? 0:1;
+  $vine = empty($_POST['16'])? 0:1;
+  $tree = empty($_POST['17'])? 0:1;
+  $flower = empty($_POST['18'])? 0:1;
+  $groundcovers = empty($_POST['19'])? 0:1;
+  $other = empty($_POST['20'])? 0:1;
+
 
   //if inputs not added, form doesn't go through and feedback shows
   if (empty($name)) {
@@ -116,10 +112,18 @@ if ($form_valid) {
   $sticky_exp = (empty($exp)? NULL:"checked");
   $sticky_wr = (empty($wr)? NULL:"checked");
   $sticky_bp = (empty($bp)? NULL:"checked");
-  $sticky_edible = $edible;
-  $sticky_scent = $scent;
-  $sticky_tactile = $tactile;
-  $sticky_visual = $visual;
+  $sticky_per = (empty($per)? NULL:"checked");
+  $sticky_ann = (empty($ann)? NULL:"checked");
+  $sticky_fullsun = (empty($fullsun)? NULL:"checked");
+  $sticky_partial = (empty($partial)? NULL:"checked");
+  $sticky_fullshade = (empty($fullshade)? NULL:"checked");
+  $sticky_shrub = (empty($shrub)? NULL:"checked");
+  $sticky_grass = (empty($grass)? NULL:"checked");
+  $sticky_vine = (empty($vine)? NULL:"checked");
+  $sticky_tree = (empty($tree)? NULL:"checked");
+  $sticky_flower = (empty($flower)? NULL:"checked");
+  $sticky_groundcovers = (empty($groundcovers)? NULL:"checked");
+  $sticky_other = (empty($other)? NULL:"checked");
 }
 
 //create sticky variables for filtering
@@ -156,6 +160,18 @@ if (isset($_GET['search'])) {
   $rules= $_GET['rules'];
   $bio = $_GET['bio'];
   $sortform = $_GET["sortform"];
+  $perennial = $_GET["perennial"];
+  $annual = $_GET["annual"];
+  $fulls = $_GET["fulls"];
+  $partials = $_GET["partials"];
+  $fullsh = $_GET["fullsh"];
+  $shr = $_GET["shr"];
+  $gra = $_GET["gra"];
+  $vin = $_GET["vin"];
+  $tre = $_GET["tre"];
+  $flo = $_GET["flo"];
+  $gro = $_GET["gro"];
+  $oth = $_GET["oth"];
 }
 
   //create variables for query parts
@@ -173,6 +189,18 @@ if (isset($_GET['search'])) {
   $sticky_expr = (empty($expr)? NULL:"checked");
   $sticky_rules = (empty($rules)? NULL:"checked");
   $sticky_bio = (empty($bio)? NULL:"checked");
+  $sticky_perennial = (empty($perennial)? NULL:"checked");
+  $sticky_annual = (empty($annual)? NULL:"checked");
+  $sticky_fulls = (empty($fulls)? NULL:"checked");
+  $sticky_partials = (empty($partials)? NULL:"checked");
+  $sticky_fullsh = (empty($fullsh)? NULL:"checked");
+  $sticky_shr = (empty($shr)? NULL:"checked");
+  $sticky_gra = (empty($gra)? NULL:"checked");
+  $sticky_vin = (empty($vin)? NULL:"checked");
+  $sticky_tre = (empty($tre)? NULL:"checked");
+  $sticky_flo = (empty($flo)? NULL:"checked");
+  $sticky_gro = (empty($gro)? NULL:"checked");
+  $sticky_oth = (empty($oth)? NULL:"checked");
 
   //create sticky variables for sorting
   if ($sortform == "byname") {
@@ -231,6 +259,20 @@ if (isset($_GET['search'])) {
 
   //execute query
   $records = exec_sql_query($db, $sql_query)->fetchAll();
+
+  //if delete button pressed, delete entry from plants
+  if (isset($_GET['delete'])) {
+    $deleted = true;
+
+    $delete_id = $_GET['delete_id'];
+    $result = exec_sql_query($db, "DELETE FROM plants WHERE id = '$delete_id'; ");
+    $result = exec_sql_query($db, "DELETE FROM tags WHERE plant_id = '$delete_id'; ");
+  }
+
+  //if edit button pressed, save id in variable
+  if (isset($_GET['edit'])) {
+    $edit_id = $_GET['edit_id'];
+  }
 ?>
 
 <head>
@@ -252,7 +294,6 @@ if (isset($_GET['search'])) {
       <li><a href="/">About</a></li>
       <li><a href="/plants">Admin Plants</a></li>
       <li><a href="/consumer-plants">Consumer Plants</a></li>
-      <li><a href="/detail">Detail</a></li>
       <li><a href="/log-in">Log in</a></li>
     </ul>
 </nav>
@@ -276,6 +317,32 @@ if (isset($_GET['search'])) {
 <label for="rules">With Rules</label>
 <input type="checkbox" id="bio" name="bio" value="bio"<?php if ($sticky_bio == "checked") {?> checked <?php }?>>
 <label for="bio">Bio</label>
+<p><em>Filter the database by growing needs and characteristics:</em></p>
+<input type="checkbox" id="perennial" name="perennial" value="perennial"<?php if ($sticky_perennial == "checked") {?> checked <?php }?>>
+<label for="per">Perennial</label>
+<input type="checkbox" id="annual" name="annual" value="annual"<?php if ($sticky_annual == "checked") {?> checked <?php }?>>
+<label for="annual">Annual</label>
+<input type="checkbox" id="fulls" name="fulls" value="fulls"<?php if ($sticky_fulls == "checked") {?> checked <?php }?>>
+<label for="fulls">Full Sun</label>
+<input type="checkbox" id="partials" name="partials" value="partials"<?php if ($sticky_partials == "checked") {?> checked <?php }?>>
+<label for="partials">Partial Shade</label>
+<input type="checkbox" id="fullsh" name="fullsh" value="fullsh"<?php if ($sticky_fullsh == "checked") {?> checked <?php }?>>
+<label for="fullsh">Full Shade</label>
+<p><em>Filter the database by general classification:</em></p>
+<input type="checkbox" id="shr" name="shr" value="shr"<?php if ($sticky_shr == "checked") {?> checked <?php }?>>
+<label for="shr">Shrub</label>
+<input type="checkbox" id="gra" name="gra" value="gra"<?php if ($sticky_gra == "checked") {?> checked <?php }?>>
+<label for="gra">Grass</label>
+<input type="checkbox" id="vin" name="vin" value="vin"<?php if ($sticky_vin == "checked") {?> checked <?php }?>>
+<label for="vin">Vine</label>
+<input type="checkbox" id="tre" name="tre" value="tre"<?php if ($sticky_tre == "checked") {?> checked <?php }?>>
+<label for="tre">Tree</label>
+<input type="checkbox" id="flo" name="flo" value="flo"<?php if ($sticky_flo == "checked") {?> checked <?php }?>>
+<label for="flo">Flower</label>
+<input type="checkbox" id="gro" name="gro" value="gro"<?php if ($sticky_gro == "checked") {?> checked <?php }?>>
+<label for="gro">Groundcovers</label>
+<input type="checkbox" id="oth" name="oth" value="oth"<?php if ($sticky_oth == "checked") {?> checked <?php }?>>
+<label for="oth">Other</label>
 <div class = "button">
 <p><em>Sort the database:</em></p>
 <form>
@@ -289,6 +356,12 @@ if (isset($_GET['search'])) {
 </div>
 </form>
 </div>
+<?php if ($deleted == true) { ?>
+<p>The plant has been deleted!</p>
+<?php } ?>
+<?php if ($plant_added == true) {?>
+<p>Thank you <?php echo htmlspecialchars($name)?> for your plant submission!</p>
+<?php }?>
 <ul>
   <?php foreach($records as $record) { ?>
   <li>
@@ -299,50 +372,98 @@ if (isset($_GET['search'])) {
     <p>Plant ID:<?php echo htmlspecialchars($record['id']);?></p>
     <p>Photo ID:<?php echo htmlspecialchars($record['file_name']);?></p>
     <div class="details">
-    <form action ="/detail">
-      <input type="submit" value="Details"/>
+    <form action ="/detail" method="get">
+      <input type="hidden" name="detail_id" value="<?php echo htmlspecialchars($record['id']); ?>">
+      <input type="submit" name="details" value="Details"/>
+    </form>
+    <form method="get" action="/edit">
+      <input type="hidden" name="edit_id" value="<?php echo htmlspecialchars($record['id']); ?>">
+      <input type="submit" name="edit" value="Edit"/>
+    </form>
+    <form method="get">
+      <input type="hidden" name="delete_id" value="<?php echo htmlspecialchars($record['id']); ?>">
+      <input type="submit" name="delete" value="Delete"/>
     </form>
     </div>
     </div>
+    <?php } ?>
+    <?php foreach($tagrecords as $tag) { ?>
     <div class="hor">
+    <h3>This plant supports:</h3>
     <div class="play">
     <div class="blurb">
+    <?php //if ($record['tag_id'] == 1) {?>
     <h4>Exploratory Constructive Play</h4>
-    <h5>Yes</h5>
+    <?php //}?>
     </div>
     <div class="blurb">
     <h4>Exploratory Sensory Play</h4>
-    <h5>Yes</h5>
     </div>
     <div class="blurb">
     <h4>Physical Play</h4>
-    <h5>Yes</h5>
     </div>
     <div class="blurb">
     <h4>Imaginative Play</h4>
-    <h5>Yes</h5>
     </div>
     <div class="blurb">
     <h4>Restorative Play</h4>
-    <h5>Yes</h5>
     </div>
     <div class="blurb">
     <h4>Expressive Play</h4>
-    <h5>Yes</h5>
     </div>
     <div class="blurb">
     <h4>Play with Rules</h4>
-    <h5>Yes</h5>
     </div>
     <div class="blurb">
     <h4>Bio Play</h4>
-    <h5>Yes</h5>
+    </div>
+    </div>
+    <h3>Growing needs and characteristics:</h3>
+    <div class = "play">
+    <div class="blurb">
+    <h4>Perennial</h4>
+    </div>
+    <div class="blurb">
+    <h4>Annual</h4>
+    </div>
+    <div class="blurb">
+    <h4>Full Sun</h4>
+    </div>
+    <div class="blurb">
+    <h4>Partial Sun</h4>
+    </div>
+    <div class="blurb">
+    <h4>Full Shade</h4>
+    </div>
+    </div>
+    <h3>General classification:</h3>
+    <div class = "play">
+    <div class="blurb">
+    <h4>Shrub</h4>
+    </div>
+    <div class="blurb">
+    <h4>Grass</h4>
+    </div>
+    <div class="blurb">
+    <h4>Vine</h4>
+    </div>
+    <div class="blurb">
+    <h4>Tree</h4>
+    </div>
+    <div class="blurb">
+    <h4>Flower</h4>
+    </div>
+    <div class="blurb">
+    <h4>Groundcovers</h4>
+    </div>
+    <div class="blurb">
+    <h4>Other</h4>
     </div>
     </div>
     </div>
     </div>
+    <?php } ?>
   </li>
-  <?php } ?>
 </ul>
 <?php if ($form_valid == false) {?>
 <h2>Add a plant</h2>
@@ -365,6 +486,7 @@ if (isset($_GET['search'])) {
 </div>
 </div>
 <div class ="checkboxes">
+<p>Playtypes:</p>
 <div class ="checkbox">
 <input type="checkbox" id="1" name="1" value="1"<?php if ($sticky_ec == "checked") {?> checked <?php }?>>
 <label for="1">Supports Exploratory Constructive Play</label>
@@ -397,25 +519,63 @@ if (isset($_GET['search'])) {
 <input type="checkbox" id="8" name="8" value="8"<?php if ($sticky_bp == "checked") {?> checked <?php }?>>
 <label for="8">Supports Bio Play</label>
 </div>
-<div class = "describe">
-<label for="edible">What does it taste like?</label>
-<textarea id="edible" name="edible"><?php echo htmlspecialchars($sticky_edible); ?></textarea>
-<label for="scent">What does it smell like?</label>
-<textarea id="scent" name="scent"><?php echo htmlspecialchars($sticky_scent); ?></textarea>
-<label for="tactile">What does it feel like?</label>
-<textarea id="tactile" name="tactile"><?php echo htmlspecialchars($sticky_tactile); ?></textarea>
-<label for="visual">What does it look like?</label>
-<textarea id="visual" name="visual"><?php echo htmlspecialchars($sticky_visual); ?></textarea>
+<p>Growing needs and characteristics:</p>
+<div class ="checkbox">
+<input type="checkbox" id="9" name="9" value="9"<?php if ($sticky_per == "checked") {?> checked <?php }?>>
+<label for="9">Perennial</label>
+</div>
+<div class ="checkbox">
+<input type="checkbox" id="10" name="10" value="10"<?php if ($sticky_ann == "checked") {?> checked <?php }?>>
+<label for="10">Annual</label>
+</div>
+<div class ="checkbox">
+<input type="checkbox" id="11" name="11" value="11"<?php if ($sticky_fullshade == "checked") {?> checked <?php }?>>
+<label for="11">Full Sun</label>
+</div>
+<div class ="checkbox">
+<input type="checkbox" id="12" name="12" value="12"<?php if ($sticky_partial == "checked") {?> checked <?php }?>>
+<label for="12">Partial Shade</label>
+</div>
+<div class ="checkbox">
+<input type="checkbox" id="13" name="13" value="13"<?php if ($sticky_fullshade == "checked") {?> checked <?php }?>>
+<label for="13">Full Shade</label>
+</div>
+<p>General classification:</p>
+<div class ="checkbox">
+<input type="checkbox" id="14" name="14" value="14"<?php if ($sticky_shrub == "checked") {?> checked <?php }?>>
+<label for="14">Shrub</label>
+</div>
+<div class ="checkbox">
+<input type="checkbox" id="15" name="15" value="15"<?php if ($sticky_grass == "checked") {?> checked <?php }?>>
+<label for="15">Grass</label>
+</div>
+<div class ="checkbox">
+<input type="checkbox" id="16" name="16" value="16"<?php if ($sticky_vine == "checked") {?> checked <?php }?>>
+<label for="16">Vine</label>
+</div>
+<div class ="checkbox">
+<input type="checkbox" id="17" name="17" value="17"<?php if ($sticky_tree == "checked") {?> checked <?php }?>>
+<label for="17">Tree</label>
+</div>
+<div class ="checkbox">
+<input type="checkbox" id="18" name="18" value="18"<?php if ($sticky_flower == "checked") {?> checked <?php }?>>
+<label for="18">Flower</label>
+</div>
+<div class ="checkbox">
+<input type="checkbox" id="19" name="19" value="19"<?php if ($sticky_groundcovers == "checked") {?> checked <?php }?>>
+<label for="19">Groundcovers</label>
+</div>
+<div class ="checkbox">
+<input type="checkbox" id="20" name="20" value="20"<?php if ($sticky_other == "checked") {?> checked <?php }?>>
+<label for="20">Other</label>
 </div>
 </div>
+<p>Upload an image of the plant:</p>
+<input type="file" name="upload">
 <div class="submit">
 <input id="submit" type="submit" name="submit" value="Submit" />
 </div>
 </form>
-<?php }?>
-
-<?php if ($plant_added == true) {?>
-<p>Thank you <?php echo htmlspecialchars($name)?> for your plant submission!</p>
 <?php }?>
 </body>
 
