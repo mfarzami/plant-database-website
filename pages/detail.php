@@ -49,6 +49,9 @@ $records = $result->fetchAll();
 </div>
 Source: <cite>Playful Plants Project</cite>
 </div>
+<form action="/plants">
+<input type="submit" value="Back to plants">
+</form>
 </body>
 
 </html>

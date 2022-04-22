@@ -3,7 +3,7 @@
 
 <?php
 
-ini_set('display_errors', 1);
+//ini_set('display_errors', 1);
 
 $db = init_sqlite_db('db/site.sqlite', 'db/init.sql');
 $result = exec_sql_query($db, 'SELECT * FROM plants; ');
@@ -171,10 +171,11 @@ if (isset($_GET['search'])) {
 }
 
   //create variables for query parts
-  $select_part = 'SELECT * FROM (plants
-  INNER JOIN relationships ON
-  (relationships.plant_id = plants.id)) INNER JOIN
-  tags ON (relationships.tag_id = tags.id);';
+  // $select_part = 'SELECT * FROM (plants
+  // INNER JOIN relationships ON
+  // (relationships.plant_id = plants.id)) INNER JOIN
+  // tags ON (relationships.tag_id = tags.id);';
+  $select_part = 'SELECT * FROM plants ';
   $where_part = "";
   $order_part = "";
   $filter_part = array();
@@ -507,9 +508,7 @@ if (isset($_GET['search'])) {
   </div>
   </li>
   <?php } ?>
-  <?php //} ?>
 </ul>
-<?php if ($form_valid == false) {?>
 <h2>Add a plant</h2>
 <form id="plant-form" method="post" novalidate>
 <div class="formtext">
@@ -620,7 +619,6 @@ if (isset($_GET['search'])) {
 <input id="submit" type="submit" name="submit" value="Submit" />
 </div>
 </form>
-<?php }?>
 </body>
 
 </html>

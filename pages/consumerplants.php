@@ -316,7 +316,8 @@ if (isset($_GET['search'])) {
     <h2><?php echo htmlspecialchars($record['plant_name']);?></h2>
     <h3><?php echo htmlspecialchars($record['species_name']);?></h3>
     <!-- Source: Playful Plants Project (from INFO2300 photo folder) -->
-    <img src="public/images/FL_05.jpg" alt="Temporary Image of Plant">
+    <?php $showfile = "public/images/".htmlspecialchars($record['file_name']).".jpg" ?>
+    <img src=<?php echo $showfile?> alt="Temporary Image of Plant">
     Source: <cite>Playful Plants Project</cite>
     </div>
     <div class="hor">

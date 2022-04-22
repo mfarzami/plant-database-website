@@ -2,7 +2,7 @@
 <html lang="en">
 
 <?php
-ini_set('display_errors', 1);
+//ini_set('display_errors', 1);
 
 //make edit id variable with hidden input id
 $edit_id = $_GET['edit_id'];
@@ -12,6 +12,10 @@ $result = exec_sql_query($db, "SELECT * FROM plants WHERE (id = $edit_id); ");
 $records = $result->fetchAll();
 //$tags = exec_sql_query($db, 'SELECT * FROM tags WHERE (id = $edit_id); ');
 //$tagrecords = $tags->fetchAll();
+
+if ($record) {
+    $plant = $record['update_id'];
+}
 ?>
 
 <head>
@@ -37,9 +41,9 @@ $records = $result->fetchAll();
     </ul>
 </nav>
 <?php foreach($records as $record) { ?>
-<form>
+<form action="/plants">
     <div class = "editform">
-    <input type = "hidden" name="edit_id" value="<?php echo htmlspecialchars($record['id']); ?>">
+    <input type = "hidden" name="edit_id" value="<?php echo htmlspecialchars($plant); ?>">
     <label for="plant_name">Plant Name: </label>
     <input type="text" id="plant_name" name="name" value="<?php echo htmlspecialchars($record['plant_name']); ?>">
     <label for="species_name">Species Name: </label>
@@ -49,12 +53,53 @@ $records = $result->fetchAll();
     <label for="file_id">Photo ID: </label>
     <input type="text" id="file_id" name="file" value="<?php echo htmlspecialchars($record['file_name']); ?>">
     </div>
-</form>
 <?php }?>
 <?php //foreach($tagrecords as $tag) { ?>
-<form>
     <div class = "editform">
-    <input type="text" id="file_id" name="file">
+<p>Types of play the plant supports:</p>
+<input type="checkbox" id="con" name="con" value="con">
+<label for="con">Exploratory Constructive</label>
+<input type="checkbox" id="sens" name="sens" value="sens">
+<label for="sens">Exploratory Sensory</label>
+<input type="checkbox" id="ph" name="ph" value="ph">
+<label for="ph">Physical</label>
+<input type="checkbox" id="im" name="im" value="im">
+<label for="im">Imaginative</label>
+<input type="checkbox" id="res" name="res" value="res">
+<label for="res">Restorative</label>
+<input type="checkbox" id="expr" name="expr" value="expr">
+<label for="expr">Expressive</label>
+<input type="checkbox" id="rules" name="rules" value="rules">
+<label for="rules">With Rules</label>
+<input type="checkbox" id="bio" name="bio" value="bio">
+<label for="bio">Bio</label>
+<p>Growing needs and characteristics:</p>
+<input type="checkbox" id="perennial" name="perennial" value="perennial">
+<label for="per">Perennial</label>
+<input type="checkbox" id="annual" name="annual" value="annual">
+<label for="annual">Annual</label>
+<input type="checkbox" id="fulls" name="fulls" value="fulls">
+<label for="fulls">Full Sun</label>
+<input type="checkbox" id="partials" name="partials" value="partials">
+<label for="partials">Partial Shade</label>
+<input type="checkbox" id="fullsh" name="fullsh" value="fullsh">
+<label for="fullsh">Full Shade</label>
+<p><em>General classification:</em></p>
+<input type="checkbox" id="shr" name="shr" value="shr">
+<label for="shr">Shrub</label>
+<input type="checkbox" id="gra" name="gra" value="gra">
+<label for="gra">Grass</label>
+<input type="checkbox" id="vin" name="vin" value="vin">
+<label for="vin">Vine</label>
+<input type="checkbox" id="tre" name="tre" value="tre">
+<label for="tre">Tree</label>
+<input type="checkbox" id="flo" name="flo" value="flo">
+<label for="flo">Flower</label>
+<input type="checkbox" id="gro" name="gro" value="gro">
+<label for="gro">Groundcovers</label>
+<input type="checkbox" id="oth" name="oth" value="oth">
+<label for="oth">Other</label>
+    <input type="submit" value="Update">
     </div>
 </form>
 <?php // }?>
