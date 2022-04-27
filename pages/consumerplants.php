@@ -2,6 +2,9 @@
 <html lang="en">
 
 <?php
+
+//ini_set('display_errors', 1);
+
 $db = init_sqlite_db('db/site.sqlite', 'db/init.sql');
 $result = exec_sql_query($db, 'SELECT * FROM plants;');
 $records = $result->fetchAll();
@@ -117,56 +120,85 @@ if ($form_valid) {
 }
 
 //create sticky variables for filtering
-$sticky_con = '';
-$sticky_sens = '';
-$sticky_ph = '';
-$sticky_im = '';
-$sticky_res = '';
-$sticky_expr = '';
-$sticky_rules = '';
-$sticky_bio = '';
-$sticky_namesort = NULL;
-$sticky_snamesort = NULL;
+$sticky_perennial = '';
+$sticky_annual = '';
+$sticky_fulls = '';
+$sticky_partials = '';
+$sticky_fullsh = '';
+$sticky_shr = '';
+$sticky_gra = '';
+$sticky_vin = '';
+$sticky_tre = '';
+$sticky_flo = '';
+$sticky_gro = '';
+$sticky_oth = '';
 
 //create variables for filtering/sorting
-$con = NULL;
-$sens = NULL;
-$ph = NULL;
-$im = NULL;
-$res = NULL;
-$expr = NULL;
-$rules= NULL;
-$bio = NULL;
+$perennial = NULL;
+$sortform = NULL;
+$annual = NULL;
+$fulls = NULL;
+$partials = NULL;
+$fullsh = NULL;
+$shr = NULL;
+$gra = NULL;
+$vin = NULL;
+$tre = NULL;
+$flo = NULL;
+$gro = NULL;
+$oth = NULL;
 $sortform = NULL;
 
 //if filter/sort form is submitted assign inputs to variables
 if (isset($_GET['search'])) {
-  $con = $_GET['con'];
-  $sens = $_GET['sens'];
-  $ph = $_GET['ph'];
-  $im = $_GET['im'];
-  $res = $_GET['res'];
-  $expr = $_GET['expr'];
-  $rules= $_GET['rules'];
-  $bio = $_GET['bio'];
+  $perennial = $_GET["perennial"];
   $sortform = $_GET["sortform"];
+  $annual = $_GET["annual"];
+  $fulls = $_GET["fulls"];
+  $partials = $_GET["partials"];
+  $fullsh = $_GET["fullsh"];
+  $shr = $_GET["shr"];
+  $gra = $_GET["gra"];
+  $vin = $_GET["vin"];
+  $tre = $_GET["tre"];
+  $flo = $_GET["flo"];
+  $gro = $_GET["gro"];
+  $oth = $_GET["oth"];
 }
 
   //create variables for query parts
-  $select_part = "SELECT * FROM plants ";
+  $select_part = "SELECT
+	plants.plant_name AS 'plant_name',
+	plants.species_name AS 'species_name',
+	plants.file_name AS 'file_name',
+	relationships.plant_id AS 'plant_id',
+	tags.tag AS 'tags.tag'
+FROM
+	relationships
+	INNER JOIN plants ON (plants.id = relationships.plant_id)
+	INNER JOIN tags ON (tags.id = relationships.tag_id) ";
   $where_part = "";
+  $group_part = " GROUP BY plant_name ";
   $order_part = "";
+
   $filter_part = array();
 
-  //create sticky variables for filtering
-  $sticky_con = (empty($con)? NULL:"checked");
-  $sticky_sens = (empty($sens)? NULL:"checked");
-  $sticky_ph = (empty($ph)? NULL:"checked");
-  $sticky_im = (empty($im)? NULL:"checked");
-  $sticky_res = (empty($res)? NULL:"checked");
-  $sticky_expr = (empty($expr)? NULL:"checked");
-  $sticky_rules = (empty($rules)? NULL:"checked");
-  $sticky_bio = (empty($bio)? NULL:"checked");
+  //create sticky variable for filtering
+  if (isset($_GET['search'])) {
+  $checked_button = $_GET["rbutton"];
+  $sticky_perennial = $checked_button == 'perennial' ? 'checked':null;
+  $sticky_annual = $checked_button == 'annual' ? 'checked':null;
+  $sticky_fulls = $checked_button == 'fulls' ? 'checked':null;
+  $sticky_partials = $checked_button == 'partials' ? 'checked':null;
+  $sticky_fullsh = $checked_button == 'fullsh' ? 'checked':null;
+  $sticky_shr = $checked_button == 'shr' ? 'checked':null;
+  $sticky_gra = $checked_button == 'gra' ? 'checked':null;
+  $sticky_vin = $checked_button == 'vin' ? 'checked':null;
+  $sticky_tre = $checked_button == 'tre' ? 'checked':null;
+  $sticky_flo = $checked_button == 'flo' ? 'checked':null;
+  $sticky_gro = $checked_button == 'gro' ? 'checked':null;
+  $sticky_oth = $checked_button == 'oth' ? 'checked':null;
+  }
 
   //create sticky variables for sorting
   if ($sortform == "byname") {
@@ -176,41 +208,55 @@ if (isset($_GET['search'])) {
   }
 
   //add filters to array
-  if ($con) {
-    array_push($filter_part, "(is_exploratoryconstructive = 1)");
+  if ($checked_button = 'perennial') {
+    $filter_part = "(tags.tag = 'PER')";
   }
 
-  if ($sens) {
-    array_push($filter_part, "(is_exploratorysensory = 1)");
+  if ($checked_button = 'annual') {
+    $filter_part = "(tags.tag = 'AN')";
   }
 
-  if ($ph) {
-    array_push($filter_part, "(is_physical = 1)");
+  if ($checked_button = 'fulls') {
+    $filter_part = "(tags.tag = 'SUN')";
   }
 
-  if ($im) {
-    array_push($filter_part, "(is_imaginative = 1)");
+  if ($checked_button = 'partials') {
+    $filter_part = "(tags.tag = 'PS')";
   }
 
-  if ($res) {
-    array_push($filter_part, "(is_restorative = 1)");
+  if ($checked_button = 'fullsh') {
+    $filter_part = "(tags.tag = 'SHADE')";
   }
 
-  if ($expr) {
-    array_push($filter_part, "(is_expressive = 1)");
+  if ($checked_button = 'shr') {
+    $filter_part = "(tags.tag = 'SHR')";
   }
 
-  if ($rules) {
-    array_push($filter_part, "(is_withrules = 1)");
+  if ($checked_button = 'gra') {
+    $filter_part = "(tags.tag = 'GRASS')";
   }
 
-  if ($bio) {
-    array_push($filter_part, "(is_bioplay = 1)");
+  if ($checked_button = 'vin') {
+    $filter_part = "(tags.tag = 'VINE')";
   }
 
-  if (count($filter_part) != 0) {
-    $where_part = " WHERE ". implode('OR', $filter_part);
+  if ($checked_button = 'tre') {
+    $filter_part = "(tags.tag = 'TREE')";
   }
+
+  if ($checked_button = 'flo') {
+    $filter_part = "(tags.tag = 'FLOW')";
+  }
+
+  if ($checked_button = 'gro') {
+    $filter_part = "(tags.tag = 'GC')";
+  }
+
+  if ($checked_button = 'oth') {
+    $filter_part = "(tags.tag = 'OTHER')";
+  }
+
+  $where_part = " WHERE ". htmlspecialchars($filter_part);
 
   //assign order by part
   if ($sticky_namesort == "selected") {
@@ -221,7 +267,7 @@ if (isset($_GET['search'])) {
   }
 
   //put query together
-  $sql_query = $select_part . $where_part . $order_part;
+  $sql_query = $select_part . $where_part . $group_part . $order_part;
 
   //execute query
   $records = exec_sql_query($db, $sql_query)->fetchAll();
@@ -240,7 +286,8 @@ if (isset($_GET['search'])) {
 
 <body>
 <h1>Playful Plants Project</h1>
-
+<?php echo htmlspecialchars($sql_query)?>
+<?php echo htmlspecialchars($checked_button)?>
 <nav>
     <ul>
       <li><a href="/">About</a></li>
@@ -251,49 +298,31 @@ if (isset($_GET['search'])) {
 </nav>
 <h2>Plant database</h2>
 <div class="search">
-<p><em>Filter the database by types of play the plant supports:</em></p>
-<form>
-<input type="checkbox" id="con" name="con" value="con"<?php if ($sticky_con == "checked") {?> checked <?php }?>>
-<label for="con">Exploratory Constructive</label>
-<input type="checkbox" id="sens" name="sens" value="sens"<?php if ($sticky_sens == "checked") {?> checked <?php }?>>
-<label for="sens">Exploratory Sensory</label>
-<input type="checkbox" id="ph" name="ph" value="ph"<?php if ($sticky_ph == "checked") {?> checked <?php }?>>
-<label for="ph">Physical</label>
-<input type="checkbox" id="im" name="im" value="im"<?php if ($sticky_im == "checked") {?> checked <?php }?>>
-<label for="im">Imaginative</label>
-<input type="checkbox" id="res" name="res" value="res"<?php if ($sticky_res == "checked") {?> checked <?php }?>>
-<label for="res">Restorative</label>
-<input type="checkbox" id="expr" name="expr" value="expr"<?php if ($sticky_expr == "checked") {?> checked <?php }?>>
-<label for="expr">Expressive</label>
-<input type="checkbox" id="rules" name="rules" value="rules"<?php if ($sticky_rules == "checked") {?> checked <?php }?>>
-<label for="rules">With Rules</label>
-<input type="checkbox" id="bio" name="bio" value="bio"<?php if ($sticky_bio == "checked") {?> checked <?php }?>>
-<label for="bio">Bio</label>
 <p><em>Filter the database by growing needs and characteristics:</em></p>
-<input type="checkbox" id="perennial" name="perennial" value="perennial"<?php if ($sticky_perennial == "checked") {?> checked <?php }?>>
+<input type="radio" id="perennial" name="rbutton" value="perennial">
 <label for="per">Perennial</label>
-<input type="checkbox" id="annual" name="annual" value="annual"<?php if ($sticky_annual == "checked") {?> checked <?php }?>>
+<input type="radio" id="annual" name="rbutton" value="annual">
 <label for="annual">Annual</label>
-<input type="checkbox" id="fulls" name="fulls" value="fulls"<?php if ($sticky_fulls == "checked") {?> checked <?php }?>>
+<input type="radio" id="fulls" name="rbutton" value="fulls"<?php echo htmlspecialchars($sticky_fulls)?>>
 <label for="fulls">Full Sun</label>
-<input type="checkbox" id="partials" name="partials" value="partials"<?php if ($sticky_partials == "checked") {?> checked <?php }?>>
+<input type="radio" id="partials" name="rbutton" value="partials">
 <label for="partials">Partial Shade</label>
-<input type="checkbox" id="fullsh" name="fullsh" value="fullsh"<?php if ($sticky_fullsh == "checked") {?> checked <?php }?>>
+<input type="radio" id="fullsh" name="rbutton" value="fullsh">
 <label for="fullsh">Full Shade</label>
 <p><em>Filter the database by general classification:</em></p>
-<input type="checkbox" id="shr" name="shr" value="shr"<?php if ($sticky_shr == "checked") {?> checked <?php }?>>
+<input type="radio" id="shr" name="rbutton" value="shr">
 <label for="shr">Shrub</label>
-<input type="checkbox" id="gra" name="gra" value="gra"<?php if ($sticky_gra == "checked") {?> checked <?php }?>>
+<input type="radio" id="gra" name="rbutton" value="gra">
 <label for="gra">Grass</label>
-<input type="checkbox" id="vin" name="vin" value="vin"<?php if ($sticky_vin == "checked") {?> checked <?php }?>>
+<input type="radio" id="vin" name="rbutton" value="vin">
 <label for="vin">Vine</label>
-<input type="checkbox" id="tre" name="tre" value="tre"<?php if ($sticky_tre == "checked") {?> checked <?php }?>>
+<input type="radio" id="tre" name="rbutton" value="tre">
 <label for="tre">Tree</label>
-<input type="checkbox" id="flo" name="flo" value="flo"<?php if ($sticky_flo == "checked") {?> checked <?php }?>>
+<input type="radio" id="flo" name="rbutton" value="flo">
 <label for="flo">Flower</label>
-<input type="checkbox" id="gro" name="gro" value="gro"<?php if ($sticky_gro == "checked") {?> checked <?php }?>>
+<input type="radio" id="gro" name="rbutton" value="gro">
 <label for="gro">Groundcovers</label>
-<input type="checkbox" id="oth" name="oth" value="oth"<?php if ($sticky_oth == "checked") {?> checked <?php }?>>
+<input type="radio" id="oth" name="rbutton" value="oth">
 <label for="oth">Other</label>
 <div class = "button">
 <p><em>Sort the database:</em></p>
@@ -317,42 +346,77 @@ if (isset($_GET['search'])) {
     <h3><?php echo htmlspecialchars($record['species_name']);?></h3>
     <!-- Source: Playful Plants Project (from INFO2300 photo folder) -->
     <?php $showfile = "public/images/".htmlspecialchars($record['file_name']).".jpg" ?>
-    <img src=<?php echo $showfile?> alt="Temporary Image of Plant">
-    Source: <cite>Playful Plants Project</cite>
+    <img src=<?php echo $showfile?> alt=<?php echo htmlspecialchars($record['plant_name'])?> class="consumerpic">
+    <div class="source">Source: <cite>Playful Plants Project</cite></div>
     </div>
     <div class="hor">
+    <h3>This plant supports:</h3>
     <div class="play">
     <div class="blurb">
     <h4>Exploratory Constructive Play</h4>
-    <h5><?php if ($record['is_exploratoryconstructive'] == 1) {?>Yes<?php } else { ?>No<?php }?></h5>
     </div>
     <div class="blurb">
     <h4>Exploratory Sensory Play</h4>
-    <h5><?php if ($record['is_exploratorysensory'] == 1) {?>Yes<?php } else { ?>No<?php }?></h5>
     </div>
     <div class="blurb">
     <h4>Physical Play</h4>
-    <h5><?php if ($record['is_physical'] == 1) {?>Yes<?php } else { ?>No<?php }?></h5>
     </div>
     <div class="blurb">
     <h4>Imaginative Play</h4>
-    <h5><?php if ($record['is_imaginative'] == 1) {?>Yes<?php } else { ?>No<?php }?></h5>
     </div>
     <div class="blurb">
     <h4>Restorative Play</h4>
-    <h5><?php if ($record['is_restorative'] == 1) {?>Yes<?php } else { ?>No<?php }?></h5>
     </div>
     <div class="blurb">
     <h4>Expressive Play</h4>
-    <h5><?php if ($record['is_expressive'] == 1) {?>Yes<?php } else { ?>No<?php }?></h5>
     </div>
     <div class="blurb">
     <h4>Play with Rules</h4>
-    <h5><?php if ($record['is_withrules'] == 1) {?>Yes<?php } else { ?>No<?php }?></h5>
     </div>
     <div class="blurb">
     <h4>Bio Play</h4>
-    <h5><?php if ($record['is_bioplay'] == 1) {?>Yes<?php } else { ?>No<?php }?></h5>
+    </div>
+    </div>
+    <h3>Growing needs and characteristics:</h3>
+    <div class = "play">
+    <div class="blurb">
+    <h4>Perennial</h4>
+    </div>
+    <div class="blurb">
+    <h4>Annual</h4>
+    </div>
+    <div class="blurb">
+    <h4>Full Sun</h4>
+    </div>
+    <div class="blurb">
+    <h4>Partial Sun</h4>
+    </div>
+    <div class="blurb">
+    <h4>Full Shade</h4>
+    </div>
+    </div>
+    <h3>General classification:</h3>
+    <div class = "play">
+    <div class="blurb">
+    <h4>Shrub</h4>
+    </div>
+    <div class="blurb">
+    <h4>Grass</h4>
+    </div>
+    <div class="blurb">
+    <h4>Vine</h4>
+    </div>
+    <div class="blurb">
+    <h4>Tree</h4>
+    </div>
+    <div class="blurb">
+    <h4>Flower</h4>
+    </div>
+    <div class="blurb">
+    <h4>Groundcovers</h4>
+    </div>
+    <div class="blurb">
+    <h4>Other</h4>
     </div>
     </div>
     </div>

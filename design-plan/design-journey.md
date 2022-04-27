@@ -164,6 +164,8 @@ _URLS:_
 
 For the consumer view of the site, I tried out both popular layouts for a catalog: grid and tiled. Both of these are very popular in media catalogs but I went with the tiled one for the sake of Minori's cognitive styles. The detailed page when you click on an entry is also a common feature of a media catalog. Mine brings Minori to a new page with an enlarged photo and added information if she wishes to learn more. I also noticed that many interactive media catalogs (like drives/photo albums) have icons to delete/share/edit photos which I liked, but I used words instead because of Minori's cognitive styles. I tried to follow the idea of having the most important information about an entry be displayed before clicking on it, and then the rest of the information coming up after clicking. Another trend I noticed in these catalogs is that the image is always on the left hand side if it is a tile-style, which is probably because it is helpful for the user's eyeline. I followed this as well. Lastly, the sorting/filtering form is usually either on top above the entries or on the left hand side. I noticed that the form being on the left hand side is more common when there are a lot of things to filter/sort by, which there aren't in this site so I could fit it right above without being distracting.
 
+_Added in final submission:_
+Upon getting the feedback that my admin page could be more data-centric in it's design, I decided to
 
 ### Cognitive Styles Explanation/Reflection (Milestone 1)
 > Write a one paragraph (6-8 sentences) reflection explaining how your final design supports the cognitive styles of each persona.
@@ -286,11 +288,6 @@ Done in project 2
 ```
 
 ```
-Filter query:
-Done in project 2
-```
-
-```
 Sort query:
 Done in project 2
 ```
@@ -303,6 +300,19 @@ SELECT * FROM relationships
   tags on (relationships.tag_id = tags.id);
 
 Note in milestone 3: I thought I would use this query in the beginning to display the data, but then I realized I actually used this for filtering to filter by the tag_id in my tags table.
+
+Note in final submission: Upon looking at this query's result in sqlite I realized that it wasn't giving me a helpful database. I plan to use this query instead for filtering:
+
+SELECT
+	plants.plant_name AS 'plant_name',
+	plants.species_name AS 'species_name',
+	plants.file_name AS 'file_name',
+	relationships.plant_id AS 'plant_id',
+	tags.tag AS 'tags.tag'
+FROM
+	relationships
+	INNER JOIN plants ON (plants.id = relationships.plant_id)
+	INNER JOIN tags ON (tags.id = relationships.tag_id)
 ```
 
 ```
@@ -349,6 +359,12 @@ if link to edit clicked
   execute SQL edit query with those values
 ```
 
+```
+Sticky forms PHP:
+if form submitted
+  store form entries in variables
+  set default values of inputs to last entry
+```
 
 ### Accessibility Audit (Final Submission)
 > Tell us what issues you discovered during your accessibility audit.

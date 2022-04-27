@@ -72,7 +72,7 @@ h1 {
   margin-bottom: 0pt;
 }
 
-.plant .play {
+.play {
   display: inline-flex;
   height: 30%;
   margin-bottom: 50px;
@@ -173,21 +173,28 @@ img {
 }
 
 .detailimg img {
-    height: 400px;
+    max-height: 400px;
+    max-width: 400px;
 }
 
 .detail {
     position: absolute;
-    left: 50%;
     align-items: center;
+    margin-left: 20%;
+    margin-top: 30px;
 }
 
 .editform {
   display: grid;
 }
 
-.tag {
+.consumerpic{
+  max-width: 150px;
+  max-height: 100px;
+}
 
+.source {
+  font-size: 9pt;
 }
 
 @media print {
