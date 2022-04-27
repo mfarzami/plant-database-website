@@ -2,7 +2,7 @@
 <html lang="en">
 
 <?php
-//ini_set('display_errors', 1);
+ini_set('display_errors', 1);
 
 //make edit id variable with hidden input id
 $edit_id = $_GET['edit_id'];
@@ -10,11 +10,28 @@ $edit_id = $_GET['edit_id'];
 $db = init_sqlite_db('db/site.sqlite', 'db/init.sql');
 $result = exec_sql_query($db, "SELECT * FROM plants WHERE (id = $edit_id); ");
 $records = $result->fetchAll();
-//$tags = exec_sql_query($db, 'SELECT * FROM tags WHERE (id = $edit_id); ');
-//$tagrecords = $tags->fetchAll();
+$relationships = exec_sql_query($db, "SELECT tag_id FROM relationships WHERE (plant_id = $edit_id); ");
+$relationshiprecords = $relationships->fetchAll();
 
 if ($record) {
     $plant = $record['update_id'];
+}
+
+//update values
+if (isset($_GET['update'])) {
+    $plant_name = $_GET['plant_name'];
+    $species_name = $_GET['species_name'];
+    $plant_id = $_GET['plant_id'];
+    $file_id = $_GET['file_id'];
+
+$sql_query = "UPDATE plants SET
+    plant_name = $plant_name,
+    species_name = $species_name,
+    plant_id = $plant_id,
+    file_id = $file_id
+    WHERE (id = $edit_id); ";
+
+$result = exec_sql_query($db, $sql_query);
 }
 ?>
 
@@ -31,7 +48,7 @@ if ($record) {
 
 <body>
 <h1>Playful Plants Project</h1>
-
+<?php echo $sql_query ?>
 <nav>
     <ul>
       <li><a href="/">About</a></li>
@@ -41,7 +58,7 @@ if ($record) {
     </ul>
 </nav>
 <?php foreach($records as $record) { ?>
-<form action="/plants">
+<form name="update" >
     <div class = "editform">
     <input type = "hidden" name="edit_id" value="<?php echo htmlspecialchars($plant); ?>">
     <label for="plant_name">Plant Name: </label>
@@ -54,8 +71,6 @@ if ($record) {
     <input type="text" id="file_id" name="file" value="<?php echo htmlspecialchars($record['file_name']); ?>">
     </div>
 <?php }?>
-<?php //foreach($tagrecords as $tag) { ?>
-    <div class = "editform">
 <p>Types of play the plant supports:</p>
 <input type="checkbox" id="con" name="con" value="con">
 <label for="con">Exploratory Constructive</label>
@@ -99,8 +114,8 @@ if ($record) {
 <label for="gro">Groundcovers</label>
 <input type="checkbox" id="oth" name="oth" value="oth">
 <label for="oth">Other</label>
+<div class="formsubmit">
     <input type="submit" value="Update">
-    </div>
+</div>
 </form>
-<?php // }?>
 </body>

@@ -22,7 +22,7 @@
       <li><a href="/log-in">Log in</a></li>
     </ul>
 </nav>
-<h2>Log in</h2>
+<h2>Admin log in</h2>
 <form>
 <div class="field">
 <label for="username">Username:</label>

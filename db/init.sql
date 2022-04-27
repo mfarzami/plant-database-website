@@ -25,6 +25,9 @@
  );
 
 -- TODO: initial seed data
+ INSERT INTO `users` (id, username, password) VALUES (1, 'kyle', 'monkey');
+
+ INSERT INTO `users` (id, username, password) VALUES (2, 'sharon', 'monkey');
 
  INSERT INTO `plants` (id, file_name, plant_name, species_name) VALUES (1, 'GR_13', 'Lungwort', 'Pulmonaria lingifolia');
 

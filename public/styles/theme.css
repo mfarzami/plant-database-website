@@ -186,6 +186,7 @@ img {
 
 .editform {
   display: grid;
+  width: 150px;
 }
 
 .consumerpic{

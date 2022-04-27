@@ -8,8 +8,10 @@
 $db = init_sqlite_db('db/site.sqlite', 'db/init.sql');
 $result = exec_sql_query($db, 'SELECT * FROM plants; ');
 $tags = exec_sql_query($db, 'SELECT * FROM tags; ');
+$relationships = exec_sql_query($db, 'SELECT * FROM relationships; ');
 $records = $result->fetchAll();
 $tagrecords = $tags->fetchAll();
+$relationshiprecords = $relationships->fetchAll();
 
 //default feedback classes as hidden
 $name_feedback = 'hidden';
@@ -128,13 +130,20 @@ if ($form_valid) {
 
     $delete_id = $_GET['delete_id'];
     $result = exec_sql_query($db, "DELETE FROM plants WHERE id = '$delete_id'; ");
-    $result = exec_sql_query($db, "DELETE FROM tags WHERE plant_id = '$delete_id'; ");
+    $result = exec_sql_query($db, "DELETE FROM relationships WHERE plant_id = '$delete_id'; ");
   }
 
   //if edit button pressed, save id in variable
   if (isset($_GET['edit'])) {
     $edit_id = $_GET['edit_id'];
   }
+
+$result = exec_sql_query($db, 'SELECT * FROM plants; ');
+$tags = exec_sql_query($db, 'SELECT * FROM tags; ');
+$relationships = exec_sql_query($db, 'SELECT * FROM relationships; ');
+$records = $result->fetchAll();
+$tagrecords = $tags->fetchAll();
+$relationshiprecords = $relationships->fetchAll();
 ?>
 
 <head>
@@ -162,7 +171,7 @@ if ($form_valid) {
 <h2>Plant database</h2>
 
 <?php if ($deleted == true) { ?>
-<p>The plant has been deleted!</p>
+<p>The plant with id <?php echo htmlspecialchars($delete_id) ?> has been deleted!</p>
 <?php } ?>
 <?php if ($plant_added == true) {?>
 <p>Thank you <?php echo htmlspecialchars($name)?> for your plant submission!</p>
