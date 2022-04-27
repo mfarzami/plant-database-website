@@ -353,70 +353,89 @@ FROM
     <h3>This plant supports:</h3>
     <div class="play">
     <div class="blurb">
-    <h4>Exploratory Constructive Play</h4>
+    <?php if ($record['tags.tag']=='EC') {?><h4>Exploratory Constructive Play</h4><?php }?>
     </div>
     <div class="blurb">
-    <h4>Exploratory Sensory Play</h4>
+    <?php if ($record['tags.tag']=='ES') {?>
+    <h4>Exploratory Sensory Play</h4><?php }?>
     </div>
     <div class="blurb">
-    <h4>Physical Play</h4>
+    <?php if ($record['tags.tag']=='PHYS') {?>
+    <h4>Physical Play</h4><?php }?>
     </div>
     <div class="blurb">
-    <h4>Imaginative Play</h4>
+    <?php if ($record['tags.tag']=='IMAG') {?>
+    <h4>Imaginative Play</h4><?php }?>
     </div>
     <div class="blurb">
-    <h4>Restorative Play</h4>
+    <?php if ($record['tags.tag']=='REST') {?>
+    <h4>Restorative Play</h4><?php }?>
     </div>
     <div class="blurb">
-    <h4>Expressive Play</h4>
+    <?php if ($record['tags.tag']=='EXP') {?>
+    <h4>Expressive Play</h4><?php }?>
     </div>
     <div class="blurb">
-    <h4>Play with Rules</h4>
+    <?php if ($record['tags.tag']=='WR') {?>
+    <h4>Play with Rules</h4><?php }?>
     </div>
     <div class="blurb">
-    <h4>Bio Play</h4>
+    <?php if ($record['tags.tag']=='BP') {?>
+    <h4>Bio Play</h4><?php }?>
     </div>
     </div>
     <h3>Growing needs and characteristics:</h3>
     <div class = "play">
     <div class="blurb">
-    <h4>Perennial</h4>
+    <?php if ($record['tags.tag']=='PER') {?>
+    <h4>Perennial</h4><?php }?>
     </div>
     <div class="blurb">
-    <h4>Annual</h4>
+    <?php if ($record['tags.tag']=='AN') {?>
+    <h4>Annual</h4><?php }?>
     </div>
     <div class="blurb">
-    <h4>Full Sun</h4>
+    <?php if ($record['tags.tag']=='SUN') {?>
+    <h4>Full Sun</h4><?php }?>
     </div>
     <div class="blurb">
-    <h4>Partial Sun</h4>
+    <?php if ($record['tags.tag']=='PS') {?>
+    <h4>Partial Sun</h4><?php }?>
     </div>
     <div class="blurb">
-    <h4>Full Shade</h4>
+    <?php if ($record['tags.tag']=='SHADE') {?>
+    <h4>Full Shade</h4><?php }?>
     </div>
     </div>
     <h3>General classification:</h3>
     <div class = "play">
     <div class="blurb">
-    <h4>Shrub</h4>
+    <?php if ($record['tags.tag']=='SHR') {?>
+    <h4>Shrub</h4><?php }?>
     </div>
     <div class="blurb">
-    <h4>Grass</h4>
+    <?php if ($record['tags.tag']=='GRASS') {?>
+    <h4>Grass</h4><?php }?>
     </div>
     <div class="blurb">
-    <h4>Vine</h4>
+    <?php if ($record['tags.tag']=='VINE') {?>
+    <h4>Vine</h4><?php }?>
     </div>
     <div class="blurb">
-    <h4>Tree</h4>
+    <?php if ($record['tags.tag']=='TREE') {?>
+    <h4>Tree</h4><?php }?>
     </div>
     <div class="blurb">
-    <h4>Flower</h4>
+    <?php if ($record['tags.tag']=='FLOW') {?>
+    <h4>Flower</h4><?php }?>
     </div>
     <div class="blurb">
-    <h4>Groundcovers</h4>
+    <?php if ($record['tags.tag']=='GC') {?>
+    <h4>Groundcovers</h4><?php }?>
     </div>
     <div class="blurb">
-    <h4>Other</h4>
+    <?php if ($record['tags.tag']=='OTHER') {?>
+    <h4>Other</h4><?php }?>
     </div>
     </div>
     </div>
