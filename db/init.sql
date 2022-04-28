@@ -31,11 +31,23 @@
   `last_login`	TEXT NOT NULL
  );
 
+ CREATE TABLE `memberships` (
+ 	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+  `group_id`	INTEGER NOT NULL,
+  `user_id`	INTEGER NOT NULL
+ );
+
+ CREATE TABLE `groups` (
+ 	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+	`group_name`	TEXT NOT NULL
+ );
+
 -- TODO: initial seed data
+ INSERT INTO `groups` (id, group_name) VALUES (1, 'admin');
+
+ INSERT INTO `memberships` (id, group_id, user_id) VALUES (1, 1, 1);
 
  INSERT INTO `users` (id, username, password) VALUES (1, 'kyle', '$2y$10$QtCybkpkzh7x5VN11APHned4J8fu78.eFXlyAMmahuAaNcbwZ7FH.');
-
- INSERT INTO `users` (id, username, password) VALUES (2, 'sharon', '$2y$10$QtCybkpkzh7x5VN11APHned4J8fu78.eFXlyAMmahuAaNcbwZ7FH.');
 
  INSERT INTO `plants` (id, file_name, plant_name, species_name) VALUES (1, 'GR_13', 'Lungwort', 'Pulmonaria lingifolia');
 
