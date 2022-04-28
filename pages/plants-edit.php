@@ -8,30 +8,35 @@ ini_set('display_errors', 1);
 $edit_id = $_GET['edit_id'];
 
 $db = init_sqlite_db('db/site.sqlite', 'db/init.sql');
-$result = exec_sql_query($db, "SELECT * FROM plants WHERE (id = $edit_id); ");
-$records = $result->fetchAll();
+$result = exec_sql_query($db, "SELECT * FROM plants WHERE (id = $edit_id); ");$records = $result->fetchAll();
 $relationships = exec_sql_query($db, "SELECT tag_id FROM relationships WHERE (plant_id = $edit_id); ");
 $relationshiprecords = $relationships->fetchAll();
 
-if ($record) {
-    $plant = $record['update_id'];
-}
+//if ($record) {
+//    $plant = $record['update_id'];
+//}
 
 //update values
-if (isset($_GET['update'])) {
-    $plant_name = $_GET['plant_name'];
-    $species_name = $_GET['species_name'];
-    $plant_id = $_GET['plant_id'];
-    $file_id = $_GET['file_id'];
+if (isset($_GET["update-submit"])) {
+    $plant_name = $_GET['name'];
+    $species_name = $_GET['species'];
+    $plant_id = $_GET['id'];
+    $file_id = $_GET['file'];
+
 
 $sql_query = "UPDATE plants SET
     plant_name = $plant_name,
     species_name = $species_name,
-    plant_id = $plant_id,
-    file_id = $file_id
+    id = $plant_id,
+    file_name = $file_id
     WHERE (id = $edit_id); ";
 
-$result = exec_sql_query($db, $sql_query);
+$result = exec_sql_query($db, "UPDATE plants SET
+plant_name = $plant_name,
+species_name = $species_name,
+id = $plant_id,
+file_name = $file_id
+WHERE (id = $edit_id); ");
 }
 ?>
 
@@ -58,9 +63,9 @@ $result = exec_sql_query($db, $sql_query);
     </ul>
 </nav>
 <?php foreach($records as $record) { ?>
-<form name="update" >
+<form name="update" action="/edit">
     <div class = "editform">
-    <input type = "hidden" name="edit_id" value="<?php echo htmlspecialchars($plant); ?>">
+    <input type = "hidden" name="edit_id" value="<?php echo htmlspecialchars($edit_id); ?>">
     <label for="plant_name">Plant Name: </label>
     <input type="text" id="plant_name" name="name" value="<?php echo htmlspecialchars($record['plant_name']); ?>">
     <label for="species_name">Species Name: </label>
@@ -115,7 +120,7 @@ $result = exec_sql_query($db, $sql_query);
 <input type="checkbox" id="oth" name="oth" value="oth">
 <label for="oth">Other</label>
 <div class="formsubmit">
-    <input type="submit" value="Update">
+    <input type="submit" value="Update" name="update-submit">
 </div>
 </form>
 </body>

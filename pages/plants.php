@@ -49,6 +49,7 @@ if (isset($_POST['submit'])) {
   $name = $_POST['name'];
   $pname = $_POST['pname'];
   $sname = $_POST['sname'];
+  $pid = $_POST['pid'];
   $ec = empty($_POST['1'])? 0:1;
   $es = empty($_POST['2'])? 0:1;
   $phys = empty($_POST['3'])? 0:1;
@@ -92,6 +93,9 @@ if ($form_valid) {
   //add inputs to database if form went through
   $result = exec_sql_query($db, "INSERT INTO plants (plant_name, species_name, file_name) VALUES ('$pname', '$sname', 'test')");
 
+  if ($ec == 1) {
+  $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (1, $pid)");}
+
   //plant has been added
   if ($result) {
   $plant_added = true;
@@ -102,6 +106,7 @@ if ($form_valid) {
   $sticky_name = $name;
   $sticky_pname = $pname;
   $sticky_sname = $sname;
+  $sticky_pid = $pid;
   $sticky_ec = (empty($ec)? NULL:"checked");
   $sticky_es = (empty($es)? NULL:"checked");
   $sticky_phys = (empty($phys)? NULL:"checked");
@@ -204,70 +209,89 @@ $relationshiprecords = $relationships->fetchAll();
     <h3>This plant supports:</h3>
     <div class="play">
     <div class="blurb">
-    <h4>Exploratory Constructive Play</h4>
+    <?php if ($record['tags.tag']=='EC') {?><h4>Exploratory Constructive Play</h4><?php }?>
     </div>
     <div class="blurb">
-    <h4>Exploratory Sensory Play</h4>
+    <?php if ($record['tags.tag']=='ES') {?>
+    <h4>Exploratory Sensory Play</h4><?php }?>
     </div>
     <div class="blurb">
-    <h4>Physical Play</h4>
+    <?php if ($record['tags.tag']=='PHYS') {?>
+    <h4>Physical Play</h4><?php }?>
     </div>
     <div class="blurb">
-    <h4>Imaginative Play</h4>
+    <?php if ($record['tags.tag']=='IMAG') {?>
+    <h4>Imaginative Play</h4><?php }?>
     </div>
     <div class="blurb">
-    <h4>Restorative Play</h4>
+    <?php if ($record['tags.tag']=='REST') {?>
+    <h4>Restorative Play</h4><?php }?>
     </div>
     <div class="blurb">
-    <h4>Expressive Play</h4>
+    <?php if ($record['tags.tag']=='EXP') {?>
+    <h4>Expressive Play</h4><?php }?>
     </div>
     <div class="blurb">
-    <h4>Play with Rules</h4>
+    <?php if ($record['tags.tag']=='WR') {?>
+    <h4>Play with Rules</h4><?php }?>
     </div>
     <div class="blurb">
-    <h4>Bio Play</h4>
+    <?php if ($record['tags.tag']=='BP') {?>
+    <h4>Bio Play</h4><?php }?>
     </div>
     </div>
     <h3>Growing needs and characteristics:</h3>
     <div class = "play">
     <div class="blurb">
-    <h4>Perennial</h4>
+    <?php if ($record['tags.tag']=='PER') {?>
+    <h4>Perennial</h4><?php }?>
     </div>
     <div class="blurb">
-    <h4>Annual</h4>
+    <?php if ($record['tags.tag']=='AN') {?>
+    <h4>Annual</h4><?php }?>
     </div>
     <div class="blurb">
-    <h4>Full Sun</h4>
+    <?php if ($record['tags.tag']=='SUN') {?>
+    <h4>Full Sun</h4><?php }?>
     </div>
     <div class="blurb">
-    <h4>Partial Sun</h4>
+    <?php if ($record['tags.tag']=='PS') {?>
+    <h4>Partial Sun</h4><?php }?>
     </div>
     <div class="blurb">
-    <h4>Full Shade</h4>
+    <?php if ($record['tags.tag']=='SHADE') {?>
+    <h4>Full Shade</h4><?php }?>
     </div>
     </div>
     <h3>General classification:</h3>
     <div class = "play">
     <div class="blurb">
-    <h4>Shrub</h4>
+    <?php if ($record['tags.tag']=='SHR') {?>
+    <h4>Shrub</h4><?php }?>
     </div>
     <div class="blurb">
-    <h4>Grass</h4>
+    <?php if ($record['tags.tag']=='GRASS') {?>
+    <h4>Grass</h4><?php }?>
     </div>
     <div class="blurb">
-    <h4>Vine</h4>
+    <?php if ($record['tags.tag']=='VINE') {?>
+    <h4>Vine</h4><?php }?>
     </div>
     <div class="blurb">
-    <h4>Tree</h4>
+    <?php if ($record['tags.tag']=='TREE') {?>
+    <h4>Tree</h4><?php }?>
     </div>
     <div class="blurb">
-    <h4>Flower</h4>
+    <?php if ($record['tags.tag']=='FLOW') {?>
+    <h4>Flower</h4><?php }?>
     </div>
     <div class="blurb">
-    <h4>Groundcovers</h4>
+    <?php if ($record['tags.tag']=='GC') {?>
+    <h4>Groundcovers</h4><?php }?>
     </div>
     <div class="blurb">
-    <h4>Other</h4>
+    <?php if ($record['tags.tag']=='OTHER') {?>
+    <h4>Other</h4><?php }?>
     </div>
     </div>
     </div>
@@ -292,6 +316,10 @@ $relationshiprecords = $relationships->fetchAll();
 <div class="field">
 <label for="sname">Species name:</label>
 <input type="text" id="sname" name="sname" value="<?php echo htmlspecialchars($sticky_sname); ?>">
+</div>
+<div class="field">
+<label for="pid">Plant ID:</label>
+<input type="text" id="pid" name="pid" value="<?php echo htmlspecialchars($sticky_pid); ?>">
 </div>
 </div>
 <div class ="checkboxes">

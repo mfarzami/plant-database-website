@@ -22,7 +22,9 @@
       <li><a href="/log-in">Log in</a></li>
     </ul>
 </nav>
+<?php if (!is_user_logged_in()) {?>
 <h2>Admin log in</h2>
+<?php echo password_login($db, $messages, $username, $password)?>
 <form>
 <div class="field">
 <label for="username">Username:</label>
@@ -36,6 +38,7 @@
 <input id="login" type="submit" name="login" value="Log in" />
 </div>
 </form>
+<?php }?>
 </body>
 
 </html>

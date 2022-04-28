@@ -262,6 +262,15 @@ Table: users
 - username: TEXT {NN, U}
 - password: TEXT {NN, U, PK}
 
+_Added in final submission to implement login logout:_
+
+Table: sessions
+
+- id: INT {NN, PK, U, AI}
+- username_id: INT {NN}
+- session: {NN, U}
+- last_login: {NN}
+
 ### Database Query Plan (Milestone 1, Milestone 2, Milestone 3, Final Submission)
 > Plan _all_ of your database queries. You may use natural language, pseudocode, or SQL.
 

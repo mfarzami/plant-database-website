@@ -3,7 +3,7 @@
 
 <?php
 
-ini_set('display_errors', 1);
+//ini_set('display_errors', 1);
 
 $db = init_sqlite_db('db/site.sqlite', 'db/init.sql');
 $result = exec_sql_query($db, 'SELECT * FROM plants;');
@@ -290,6 +290,7 @@ FROM
 <h1>Playful Plants Project</h1>
 <?php echo htmlspecialchars($sql_query)?>
 <?php echo htmlspecialchars($checked_button)?>
+<?php echo htmlspecialchars($addedplantid)?>
 <nav>
     <ul>
       <li><a href="/">About</a></li>
