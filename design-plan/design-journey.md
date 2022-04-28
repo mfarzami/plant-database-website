@@ -268,8 +268,18 @@ Table: sessions
 
 - id: INT {NN, PK, U, AI}
 - username_id: INT {NN}
-- session: {NN, U}
-- last_login: {NN}
+- session: TEXT {NN, U}
+- last_login: TEXT {NN}
+
+Table: memberships
+
+- id: INT {NN, PK, U, AI}
+- group_id: INT {NN}
+- user_id: INT {NN}
+
+Table: groups
+
+- id: INT {NN, PK, U, AI}
 
 ### Database Query Plan (Milestone 1, Milestone 2, Milestone 3, Final Submission)
 > Plan _all_ of your database queries. You may use natural language, pseudocode, or SQL.

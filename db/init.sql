@@ -24,6 +24,13 @@
  	`tag_id`	INTEGER NOT NULL
  );
 
+ CREATE TABLE `sessions` (
+ 	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+  `username_id`	INTEGER NOT NULL,
+ 	`session`	TEXT NOT NULL UNIQUE,
+  `last_login`	TEXT NOT NULL,
+ );
+
 -- TODO: initial seed data
  INSERT INTO `users` (id, username, password) VALUES (1, 'kyle', 'monkey');
 
