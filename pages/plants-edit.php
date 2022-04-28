@@ -117,7 +117,7 @@ array(
 
 
 ?>
-
+<?php if (is_user_logged_in()) {?>
 <body>
 <?php include('includes/header.php'); ?>
 <?php if (isset($_GET['update-submit'])) { ?>
@@ -192,3 +192,4 @@ foreach($relationshiprecords as $record) {
     <input type="submit" value="Update" name="update-submit">
 </div>
 </body>
+<?php } ?>
