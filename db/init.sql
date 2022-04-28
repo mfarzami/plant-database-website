@@ -39,7 +39,7 @@
 
  CREATE TABLE `groups` (
  	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-	`group_name`	NOT NULL,
+	`group_name`	NOT NULL
  );
 
 -- TODO: initial seed data
