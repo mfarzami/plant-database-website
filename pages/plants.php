@@ -68,8 +68,14 @@ if (isset($_POST['submit'])) {
   $groundcovers = empty($_POST['19'])? 0:1;
   $other = empty($_POST['20'])? 0:1;
   $upload = $_FILES['upload'];
-  $uploadname = $upload['name'];
+  $uploadname = basename($upload['name']);
   $uploadtmpname = $upload['tmp_name'];
+
+  //add file to uploads
+  if ($result) {
+  $filename = 'public/uploads/plants/'.$uploadname;
+  move_uploaded_file($uploadtmpname, $filename);
+  }
 
 
   //if inputs not added, form doesn't go through and feedback shows
@@ -93,8 +99,66 @@ if ($form_valid) {
   //add inputs to database if form went through
   $result = exec_sql_query($db, "INSERT INTO plants (plant_name, species_name, file_name) VALUES ('$pname', '$sname', '$uploadname')");
 
+  //add tags to input
   if ($ec == 1) {
   $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (1, $pid)");}
+
+  if ($es == 1) {
+    $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (2, $pid)");}
+
+  if ($phys == 1) {
+  $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (3, $pid)");}
+
+  if ($imag == 1) {
+    $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (4, $pid)");}
+
+  if ($rest == 1) {
+  $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (5, $pid)");}
+
+  if ($exp == 1) {
+    $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (6, $pid)");}
+
+  if ($wr == 1) {
+  $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (7, $pid)");}
+
+  if ($bp == 1) {
+    $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (8, $pid)");}
+
+  if ($per == 1) {
+  $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (9, $pid)");}
+
+  if ($ann == 1) {
+    $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (10, $pid)");}
+
+  if ($fullsun == 1) {
+  $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (11, $pid)");}
+
+  if ($partial == 1) {
+    $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (12, $pid)");}
+
+  if ($fullshade == 1) {
+  $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (13, $pid)");}
+
+  if ($shrub == 1) {
+    $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (14, $pid)");}
+
+  if ($grass == 1) {
+  $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (15, $pid)");}
+
+  if ($vine == 1) {
+    $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (16, $pid)");}
+
+  if ($tree == 1) {
+  $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (17, $pid)");}
+
+  if ($flower == 1) {
+    $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (18, $pid)");}
+
+  if ($groundcovers == 1) {
+  $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (19, $pid)");}
+
+  if ($other == 1) {
+    $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (20, $pid)");}
 
   //add file to uploads
   move_uploaded_file($uploadname, 'public/uploads');
@@ -108,7 +172,6 @@ if ($form_valid) {
   $sticky_name = $name;
   $sticky_pname = $pname;
   $sticky_sname = $sname;
-  $sticky_pid = $pid;
   $sticky_ec = (empty($ec)? NULL:"checked");
   $sticky_es = (empty($es)? NULL:"checked");
   $sticky_phys = (empty($phys)? NULL:"checked");
@@ -165,13 +228,16 @@ $relationshiprecords = $relationships->fetchAll();
 <ul>
 <?php foreach($records as $record) { ?>
   <li>
-    <div class="plant">
+    <div class="adminplant">
     <div class="name">
     <h2><?php echo htmlspecialchars($record['plant_name']);?></h2>
     <h3><?php echo htmlspecialchars($record['species_name']);?></h3>
+    </div>
+    <div class="ids">
     <p>Plant ID:<?php echo htmlspecialchars($record['id']);?></p>
     <p>Photo ID:<?php echo htmlspecialchars($record['file_name']);?></p>
-    <div class="details">
+    </div>
+    <div class="admindetails">
     <form action ="/detail" method="get">
       <input type="hidden" name="detail_id" value="<?php echo htmlspecialchars($record['id']); ?>">
       <input type="submit" name="details" value="Details"/>
@@ -183,15 +249,10 @@ $relationshiprecords = $relationships->fetchAll();
     <form method="get">
       <input type="hidden" name="delete_id" value="<?php echo htmlspecialchars($record['id']); ?>">
       <input type="submit" name="delete" value="Delete"/>
+      </div>
+</div>
     </form>
-    </div>
-    </div>
-    <?php }
-    $idcurrent = $_GET['detail_id'];
-    $relationships = exec_sql_query($db, 'SELECT tag FROM relationships WHERE (plant_id = $idcurrent); ');
-    $tagarray = array();
-    foreach($relationshiprecords as $record) {
-    array_push($tagarray, $record['tag_id']);}?>
+    <?php }?>
     </div>
   </li>
 </ul>
@@ -212,10 +273,6 @@ $relationshiprecords = $relationships->fetchAll();
 <div class="field">
 <label for="sname">Species name:</label>
 <input type="text" id="sname" name="sname" value="<?php echo htmlspecialchars($sticky_sname); ?>">
-</div>
-<div class="field">
-<label for="pid">Plant ID:</label>
-<input type="text" id="pid" name="pid" value="<?php echo htmlspecialchars($sticky_pid); ?>">
 </div>
 </div>
 <div class ="checkboxes">
@@ -306,6 +363,7 @@ $relationshiprecords = $relationships->fetchAll();
 <p>Upload an image of the plant:</p>
 <input type="hidden" name="MAX_FILE_SIZE" value="500000"/>
 <input type="file" name="upload">
+<input type="hidden" name='pid' value="<?php echo htmlspecialchars($record['id']); ?>">
 <div class="submit">
 <input id="submit" type="submit" name="submit" value="Submit" />
 </div>

@@ -1,210 +1,257 @@
 html {
-    font-family: Optima, sans-serif;
+  font-family: Optima, sans-serif;
 }
 
 nav li {
-    display: inline-block;
-    padding: 15px;
-  }
-
-nav {
-    text-align: center;
-    font-size: 14pt;
-  }
-
-nav a {
-    text-decoration: none;
-    color: rgb(77, 75, 75);
-  }
-
-h1 {
-    text-align: center;
-  }
-
-.plant {
-  display: inline-flex;
-  flex-direction: column;
-  background-color: rgb(207, 241, 214);
-  width: 1150px;
-  margin-bottom: 30px;
-  line-height: 100%;
-  height: 250px;
+  display: inline-block;
+  padding: 15px;
 }
 
+nav {
+  text-align: center;
+  font-size: 14pt;
+}
+
+nav a {
+  text-decoration: none;
+  color: rgb(77, 75, 75);
+}
+
+h1 {
+  text-align: center;
+}
+
+.plant {
+display: inline-flex;
+flex-direction: column;
+background-color: rgb(207, 241, 214);
+width: 1150px;
+margin-bottom: 30px;
+line-height: 100%;
+height: 250px;
+}
+
+.adminplant {
+  display: flex;
+  flex-direction: row;
+  background-color: rgb(207, 241, 214);
+  width: 1050px;
+  margin: 20px;
+  line-height: 100%;
+  height: 100px;
+  }
+
+.adminplant .name{
+  margin-left: 50px;
+  margin-right: 50px;
+  width: 200px;
+}
+
+.adminplant .ids{
+  width: 500px;
+}
+
+.adminplant .admindetails{
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-top: 30px;
+}
 .search {
-  margin-left: 10px;
+margin-left: 10px;
 }
 
 .button {
+display: flex;
+flex-direction: row;
+}
+
+.button select {
+height: 25px;
+margin-top: 10px;
+margin-left: 10px;
+}
+
+.plant h2 {
+line-height: 150%;
+width: 200px;
+}
+
+.plant h3 {
+line-height: 170%;
+font-size: 10pt;
+}
+
+.plant .name {
+width: 400px;
+margin: 20px;
+}
+
+.plant .hor {
+display: flex;
+flex-direction: column;
+height: 100px;
+margin-right: 150px;
+}
+
+.hor h3 {
+line-height: 0pt;
+margin-bottom: 0pt;
+}
+
+.play {
+display: inline-flex;
+height: 30%;
+margin-bottom: 15px;
+}
+
+.plant .play h4 {
+height: 20px;
+}
+
+.plant .text {
+display: inline-flex;
+height: 30%;
+}
+
+.plant p {
+font-size: 9pt;
+}
+
+.plant .name h2 {
+margin: 0px;
+}
+
+.plant .play p {
+width: 30%;
+}
+
+.plant .text h4{
+margin-bottom: -15px;
+margin-right: 10px;
+margin-top: 25px;
+}
+
+.plant .text {
+width: 800px;
+}
+
+.plant .text .blurb {
+display: block;
+width: 400px;
+padding-top: 20px;
+}
+
+.hor .blurb {
+margin-right: 30px;
+}
+
+.plant .play .blurb {
+display: block;
+width: 100px;
+}
+
+.blurb h5{
+line-height: 0px;
+margin-top: 0;
+align-self: center;
+}
+
+.formsubmit {
+padding-left: 700px;
+}
+
+.blurb p{
+width: 70%;
+}
+
+ul {
+list-style-type: none;
+}
+
+.plant h5 {
+font-size: 14pt;
+}
+
+.formtext {
+display: flex;
+flex-direction: column;
+width: 300px;
+}
+
+.field {
+display: flex;
+}
+
+.checkboxes {
+padding-top: 20px;
+}
+
+.submit {
+margin-top: 20px;
+margin-left: 250px;
+}
+
+.feedback {
+color: red;
+}
+.hidden {
+display: none;
+}
+
+img {
+  height: 130px;
+}
+
+.admindetails {
   display: flex;
   flex-direction: row;
 }
 
-.button select {
-  height: 25px;
-  margin-top: 10px;
-  margin-left: 10px;
-}
-
-.plant h2 {
-  line-height: 150%;
-  width: 200px;
-}
-
-.plant h3 {
-  line-height: 170%;
-  font-size: 10pt;
-}
-
-.plant .name {
-  width: 400px;
-  margin: 20px;
-}
-
-.plant .hor {
-  display: flex;
-  flex-direction: column;
-  height: 100px;
-  margin-right: 150px;
-}
-
-.hor h3 {
-  line-height: 0pt;
-  margin-bottom: 0pt;
-}
-
-.play {
-  display: inline-flex;
-  height: 30%;
-  margin-bottom: 15px;
-}
-
-.plant .play h4 {
-  height: 20px;
-}
-
-.plant .text {
-  display: inline-flex;
-  height: 30%;
-}
-
-.plant p {
-  font-size: 9pt;
-}
-
-.plant .name h2 {
-  margin: 0px;
-}
-
-.plant .play p {
-  width: 30%;
-}
-
-.plant .text h4{
-  margin-bottom: -15px;
-  margin-right: 10px;
-  margin-top: 25px;
-}
-
-.plant .text {
-  width: 800px;
-}
-
-.plant .text .blurb {
-  display: block;
-  width: 400px;
-  padding-top: 20px;
-}
-
-.hor .blurb {
-  margin-right: 30px;
-}
-
-.plant .play .blurb {
-  display: block;
-  width: 100px;
-}
-
-.blurb h5{
-  line-height: 0px;
-  margin-top: 0;
-  align-self: center;
-}
-
-.formsubmit {
-  padding-left: 700px;
-}
-
-.blurb p{
-  width: 70%;
-}
-
-ul {
-  list-style-type: none;
-}
-
-.plant h5 {
-  font-size: 14pt;
-}
-
-.formtext {
-  display: flex;
-  flex-direction: column;
-  width: 300px;
-}
-
-.field {
-  display: flex;
-}
-
-.checkboxes {
-  padding-top: 20px;
-}
-
-.submit {
-  margin-top: 20px;
-  margin-left: 250px;
-}
-
-.feedback {
-  color: red;
-}
-.hidden {
-  display: none;
-}
-
-img {
-    height: 130px;
-}
-
 .detailimg img {
-    max-height: 400px;
-    max-width: 400px;
+  max-height: 400px;
+  max-width: 400px;
 }
 
 .detail {
-    position: absolute;
-    align-items: center;
-    margin-left: 20%;
-    margin-top: 30px;
+
 }
 
+
 .editform {
-  display: grid;
-  width: 150px;
+display: grid;
+width: 150px;
 }
 
 .consumerpic{
-  max-width: 150px;
-  max-height: 100px;
+max-width: 150px;
+max-height: 100px;
 }
 
 .source {
-  font-size: 9pt;
+font-size: 9pt;
 }
 
 @media print {
-  nav, header, .search, form{
-    display: none;
+nav, header, .search, form{
+  display: none;
 }
+}
+
+@media (max-width: 760px) {
+  .plant {
+    width: 300px;
+  }
+  .detail {
+    margin-left: 200px;
+    margin-top: 200px;
+  }
+
+  .search {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .formsubmit {
+    padding-right: 1000px;
+  }
 }

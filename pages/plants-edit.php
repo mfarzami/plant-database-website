@@ -13,7 +13,7 @@ $tags = exec_sql_query($db, "SELECT tag_id FROM relationships WHERE (plant_id = 
 $tagrecords = $relationships->fetchAll();
 
 //update values
-if (isset($_GET["update-submit"])) {
+if (isset($_GET['update-submit'])) {
     $plant_name = $_GET['name'];
     $species_name = $_GET['species'];
     $plant_id = $_GET['id'];

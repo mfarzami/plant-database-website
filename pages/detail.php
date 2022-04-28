@@ -17,7 +17,11 @@ $relationshiprecords = $relationships->fetchAll();
   <input type = "hidden" name="detail_id" value="<?php echo htmlspecialchars($detail_id); ?>">
 </form>
 <?php } ?>
-<form action="/plants">
+<form <?php if (is_user_logged_in()) { ?>
+  action="/plants"
+  <?php } else { ?>
+    action="/consumer-plants"
+    <?php } ?>>
 <input type="submit" value="Back to plants">
 </form>
 <div class = "detail">
