@@ -303,7 +303,7 @@ UPDATE plants SET
 
 ```
 Add query:
-Done in project 2
+INSERT INTO plants (plant_name, species_name, file_name) VALUES [variables for the form inputs for these fields];
 ```
 
 ```
@@ -320,7 +320,7 @@ SELECT * FROM relationships
 
 Note in milestone 3: I thought I would use this query in the beginning to display the data, but then I realized I actually used this for filtering to filter by the tag_id in my tags table.
 
-Note in final submission: Upon looking at this query's result in sqlite I realized that it wasn't giving me a helpful database. I plan to use this query instead for filtering:
+Note in final submission: Upon looking at this query's result in sqlite I realized that it wasn't giving me a helpful database. I plan to use this query instead for filtering and only sometimes for displaying information:
 
 SELECT
 	plants.plant_name AS 'plant_name',
@@ -385,6 +385,13 @@ if form submitted
   set default values of inputs to last entry
 ```
 
+```
+Display detail/all PHP:
+create empty array
+for each entry in relationships where id = id of plant being displayed
+  add add id to the array
+```
+
 ### Accessibility Audit (Final Submission)
 > Tell us what issues you discovered during your accessibility audit.
 > What do you do to improve the accessibility of your site?
@@ -425,30 +432,34 @@ TODO
 
 _View all entries:_
 
-1. TODO
-2.
+1. You will start off on a brief about page
+2. Use the nav bar to hit "plants", which will be the consumer/guest view of the database
+3. If you are an admin, navigate to the log in page from the nav bar log in with the username "kyle" and the password "monkey"
+4. Once logged in, you can click back to the "plants" page and automatically be in the admin view
 
 _View all entries for a tag:_
 
-1. TODO
-2.
+1. Either start off without logging in our log out to be in the consumer view
+2. Use the radio buttons on the filtering form on top of the database and hit "search" to filter the entries by a certain tag
 
 _View a single entry's details:_
 
-1. TODO
-2.
+1. On either the consumer or admin page, hit the "details" button by every listing
+2. Once you are done, hit the "back to plants" button or use the nav bar to get to another page
 
 _How to insert and upload a new entry:_
 
-1. TODO
-2.
+1. In the admin view, scroll to the bottom of the page
+2. Use the add plant form to insert the information about the plant and hit "submit"
+3. You will see confirmation at the top that your plant has been submitted
 
 _How to delete an entry:_
 
-1. TODO
-2.
+1. In the admin view, hit the "delete" button by every listing
+2. You will see confirmation at the top that the entry has been deleted
 
 _How to edit and existing entry and its tags:_
 
-1. TODO
-2.
+1. In the admin view, hit the "edit" button by every listing
+2. In the edit page, edit any text or checkbox fields you may want
+3. Once you hit "update", you will be automatically redirected to the database where the entry will be updated
