@@ -1,5 +1,4 @@
 <?php
-//ini_set('display_errors', 1);
 
 //make edit id variable with hidden input id
 $edit_id = $_GET['edit_id'];

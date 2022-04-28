@@ -21,7 +21,10 @@
  CREATE TABLE `relationships` (
  	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
   `plant_id`	INTEGER NOT NULL,
- 	`tag_id`	INTEGER NOT NULL
+ 	`tag_id`	INTEGER NOT NULL,
+
+	 FOREIGN KEY (plant_id) REFERENCES plants(id),
+	 FOREIGN KEY (tag_id) REFERENCES tags(id)
  );
 
  CREATE TABLE `sessions` (
