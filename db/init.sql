@@ -28,7 +28,7 @@
  	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
   `username_id`	INTEGER NOT NULL,
  	`session`	TEXT NOT NULL UNIQUE,
-  `last_login`	TEXT NOT NULL,
+  `last_login`	TEXT NOT NULL
  );
 
  CREATE TABLE `memberships` (
@@ -39,7 +39,7 @@
 
  CREATE TABLE `groups` (
  	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-	`group_name`	NOT NULL
+	`group_name`	TEXT NOT NULL
  );
 
 -- TODO: initial seed data
