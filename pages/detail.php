@@ -1,10 +1,11 @@
 <?php
-ini_set('display_errors', 1);
+//ini_set('display_errors', 1);
 
 $detail_id = $_GET['detail_id'];
 
 $db = init_sqlite_db('db/site.sqlite', 'db/init.sql');
-$result = exec_sql_query($db, "SELECT * FROM plants WHERE (id = $detail_id); ");
+$result = exec_sql_query($db,
+"SELECT * FROM plants WHERE (id = $detail_id); ");
 $records = $result->fetchAll();
 $relationships = exec_sql_query($db, "SELECT * FROM relationships WHERE (plant_id = $detail_id); ");
 $relationshiprecords = $relationships->fetchAll();

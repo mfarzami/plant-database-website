@@ -97,65 +97,70 @@ if (isset($_POST['submit'])) {
 
 if ($form_valid) {
   //add inputs to database if form went through
-  $result = exec_sql_query($db, "INSERT INTO plants (plant_name, species_name, file_name) VALUES ('$pname', '$sname', '$uploadname')");
+  $result = exec_sql_query($db, "INSERT INTO plants (plant_name, species_name, file_name) VALUES (:pname, :sname, :uploadname) ",
+  array(
+    ':pname' => $pname,
+    ':sname' => $sname,
+    ':uploadname' => $uploadname
+  ));
 
   //add tags to input
   if ($ec == 1) {
-  $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (1, $pid)");}
+    $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (1, $pid)");}
 
   if ($es == 1) {
     $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (2, $pid)");}
 
   if ($phys == 1) {
-  $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (3, $pid)");}
+    $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (3, $pid)");}
 
   if ($imag == 1) {
     $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (4, $pid)");}
 
   if ($rest == 1) {
-  $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (5, $pid)");}
+    $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (5, $pid)");}
 
   if ($exp == 1) {
     $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (6, $pid)");}
 
   if ($wr == 1) {
-  $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (7, $pid)");}
+    $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (7, $pid)");}
 
   if ($bp == 1) {
     $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (8, $pid)");}
 
   if ($per == 1) {
-  $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (9, $pid)");}
+    $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (9, $pid)");}
 
   if ($ann == 1) {
     $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (10, $pid)");}
 
   if ($fullsun == 1) {
-  $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (11, $pid)");}
+    $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (11, $pid)");}
 
   if ($partial == 1) {
     $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (12, $pid)");}
 
   if ($fullshade == 1) {
-  $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (13, $pid)");}
+    $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (13, $pid)");}
 
   if ($shrub == 1) {
     $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (14, $pid)");}
 
   if ($grass == 1) {
-  $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (15, $pid)");}
+    $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (15, $pid)");}
 
   if ($vine == 1) {
     $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (16, $pid)");}
 
   if ($tree == 1) {
-  $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (17, $pid)");}
+    $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (17, $pid)");}
 
   if ($flower == 1) {
     $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (18, $pid)");}
 
   if ($groundcovers == 1) {
-  $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (19, $pid)");}
+    $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (19, $pid)");}
 
   if ($other == 1) {
     $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (20, $pid)");}

@@ -1,5 +1,5 @@
 <?php
-ini_set('display_errors', 1);
+//ini_set('display_errors', 1);
 
 //make edit id variable with hidden input id
 $edit_id = $_GET['edit_id'];
@@ -19,27 +19,116 @@ if (isset($_GET['update-submit'])) {
     $plant_id = $_GET['id'];
     $file_id = $_GET['file'];
 
+    $con = $_GET["con"];
+    $sens = $_GET["sens"];
+    $ph = $_GET["ph"];
+    $im = $_GET["im"];
+    $res = $_GET["res"];
+    $expr = $_GET["expr"];
+    $rules = $_GET["rules"];
+    $bio = $_GET["bio"];
+    $perennial = $_GET["perennial"];
+    $annual = $_GET["annual"];
+    $fulls = $_GET["fulls"];
+    $partials = $_GET["partials"];
+    $fullsh = $_GET["fullsh"];
+    $shr = $_GET["shr"];
+    $gra = $_GET["gra"];
+    $vin = $_GET["vin"];
+    $tre = $_GET["tre"];
+    $flo = $_GET["flo"];
+    $gro = $_GET["gro"];
+    $oth = $_GET["oth"];
 
-$sql_query = "UPDATE plants SET
-    plant_name = $plant_name,
-    species_name = $species_name,
-    id = $plant_id,
-    file_name = $file_id
-    WHERE (id = $edit_id); ";
+    $result = exec_sql_query($db, "DELETE FROM relationships WHERE (plant_id) = $edit_id");
+
+    if (!empty($con)) {
+        $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (1, $edit_id);");}
+
+    if (!empty($sens)) {
+        $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (2, $edit_id);");}
+
+    if (!empty($ph)) {
+        $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (3, $edit_id);");}
+
+    if (!empty($im)) {
+        $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (4, $edit_id);");}
+
+    if (!empty($res)) {
+        $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (5, $edit_id);");}
+
+    if (!empty($expr)) {
+        $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (6, $edit_id);");}
+
+    if (!empty($rules)) {
+        $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (7, $edit_id);");}
+
+    if (!empty($bio)) {
+        $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (8, $edit_id);");}
+
+    if (!empty($perennial)) {
+        $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (9, $edit_id);");}
+
+    if (!empty($annual)) {
+        $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (10, $edit_id);");}
+
+    if (!empty($fulls)) {
+        $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (11, $edit_id);");}
+
+    if (!empty($partials)) {
+        $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (12, $edit_id);");}
+
+    if (!empty($fullsh)) {
+        $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (13, $edit_id);");}
+
+    if (!empty($shr)) {
+        $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (14, $edit_id);");}
+
+    if (!empty($gra)) {
+        $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (15, $edit_id);");}
+
+    if (!empty($vin)) {
+        $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (16, $edit_id);");}
+
+    if (!empty($tre)) {
+        $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (17, $edit_id);");}
+
+    if (!empty($flo)) {
+        $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (18, $edit_id);");}
+
+    if (!empty($gro)) {
+        $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (19, $edit_id);");}
+
+    if (!empty($oth)) {
+        $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (20, $edit_id);");}
 
 $result = exec_sql_query($db, "UPDATE plants SET
-plant_name = $plant_name,
-species_name = $species_name,
-id = $plant_id,
-file_name = $file_id
-WHERE (id = $edit_id); ");
+plant_name = :plant_name,
+species_name = :species_name,
+file_name = :file_id
+WHERE (id = :edit_id); ",
+array(
+  ':plant_name' => $plant_name,
+  ':species_name' => $plant_name,
+  ':file_id' => $file_id,
+  ':edit_id' => $edit_id,
+));
 }
+
+
 ?>
 
 <body>
 <?php include('includes/header.php'); ?>
+<?php if (isset($_GET['update-submit'])) { ?>
+    <p>The plant has been updated!</p>
+    </form>
+<form action="/plants">
+    <input type="submit" value="Back to Plants">
+</form>
+    <?php }?>
 <?php foreach($records as $record) { ?>
-<form name="update" action="/edit">
+<form name="update" action="/edit" method="get">
     <div class = "editform">
     <input type = "hidden" name="edit_id" value="<?php echo htmlspecialchars($edit_id); ?>">
     <label for="plant_name">Plant Name: </label>
@@ -102,5 +191,4 @@ foreach($relationshiprecords as $record) {
 <div class="formsubmit">
     <input type="submit" value="Update" name="update-submit">
 </div>
-</form>
 </body>

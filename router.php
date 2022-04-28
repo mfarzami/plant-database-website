@@ -10,8 +10,6 @@ process_session_params($db, $session_messages);
 //is the current user an admin or consumer? - user instructed session code
 define('ADMIN_GROUP_ID', 1);
 $is_admin = is_user_member_of($db, ADMIN_GROUP_ID);
-define('CONSUMER_GROUP_ID', 2);
-$is_consumer = is_user_member_of($db, CONSUMER_GROUP_ID);
 
 function match_routes($uri, $routes)
 {
