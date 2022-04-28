@@ -287,12 +287,16 @@ Table: groups
 
 ```
 Log in query:
-SELECT * FROM users WHERE (username == [variable for inputted username] && password == [variable for inputted password])
+SELECT * FROM users WHERE (username = [variable for inputted username] && password = [variable for inputted password])
+
+Note: I didn't end up using this one since we were allowed to use session code.
 ```
 
 ```
 Delete entry query:
-DELETE * FROM plants WHERE (plant_id == [variable for id on clicked on entry])
+DELETE * FROM plants WHERE (plant_id = [variable for id on clicked on entry])
+
+DELETE * FROM relationships WHERE (plant_id = [variable for id on clicked on entry])
 ```
 
 ```
@@ -305,6 +309,9 @@ UPDATE plants SET
 ```
 Add query:
 INSERT INTO plants (plant_name, species_name, file_name) VALUES [variables for the form inputs for these fields];
+
+(php code to find out if checkbox for tag was checked)
+INSERT INTO relationships (tag_id, plant_id) VALUES ([id of tag], [id of plant]);
 ```
 
 ```
@@ -336,11 +343,6 @@ FROM
 ```
 
 ```
-Delete query:
-DELETE FROM plants WHERE id = [variable from hidden input to get id];
-```
-
-```
 Edit query:
 UPDATE plants SET ([variable of field] = [variable of new field content] WHERE id = [variable from hidden input to get id]);
 ```
@@ -348,6 +350,15 @@ UPDATE plants SET ([variable of field] = [variable of new field content] WHERE i
 ```
 Tag query:
 UPDATE plants SET ([variable of tag] = [variable of new tag setting - whether it has it or not] WHERE id = [variable from hidden input to get id]);
+
+Note: I revised this query and created two seperate ones, one to update the plant's fields and one to update the tags:
+
+UPDATE plants SET ([variable of field in plants] = [variable of new updated field] WHERE id = [variable from hidden input to get id]);
+
+DELETE FROM relationships WHERE (plant_id) = [variable from hidden input to get id]);
+
+(php code to find out if checkbox for tag was checked)
+INSERT INTO relationships (tag_id, plant_id) VALUES ([id of tag], variable from hidden input to get id of plant]);
 ```
 
 ### Code Planning (Milestone 1, Milestone 2, Milestone 3, Final Submission)
@@ -387,7 +398,7 @@ if form submitted
 ```
 
 ```
-Display detail/all PHP:
+Display tags PHP:
 create empty array
 for each entry in relationships where id = id of plant being displayed
   add tag_id to the array
@@ -398,7 +409,7 @@ display tags depending on whether their tag id is in the array
 > Tell us what issues you discovered during your accessibility audit.
 > What do you do to improve the accessibility of your site?
 
-TODO
+I found issues with two missing form labels and a missing label for a file upload input which I fixed. I realized that even though the checkboxes looked correct to me, it would have been highly detrimental to someone with a disability in which they couldn't read the label without audio.
 
 
 ## Reflection (Final Submission)
@@ -406,24 +417,24 @@ TODO
 ### Audience (Final Submission)
 > Tell us how your final site meets the goals of your audiences. Be specific here. Tell us how you tailored your design, content, etc. to make your website usable for your personas.
 
-TODO
+One of the major design shifts I made from my original idea was making the admin view all page more data-centric. I realized that the large tiles and need to scroll that I designed for consumers was unneccesary and distracting for Skye. My new design allows her to scroll quickly, see many entries at once, and easily find and make changes to the entries she wants to. I know Skye doesn't have much time, so she would like to get her admin work done quickly and efficiently. Being able to see a lot of entries at once also helps with her learning style, which is to gather all informaton before doing something. In addition, for both Skye and Minori (consumer), I realized that I didn't need to repeat the information that I offer in the details page on the view all page. I instead chose the most important information for each user and kept the full information in the details page. I made sure to make all my buttons and forms as usable for Skye as possible. I did this by following the user eyeline and making buttons clearly labeled. Although some of my design ideas were more complex/artistic (for example: icon buttons), Skye prefers to be very clear on an action she takes while using a technology before she does it, so I labeled buttons with exactly what they will do. I also wanted to reassure Skye that her actions were successful to avoid having her be concerned with misusing the technology, which is why I added confirmation messages for deleting and editing entries. This is also meant to boost her self confidence while using tech, which she struggles with. For both Skye and Minori, I wanted to avoid confusion about login sessions so they wouldn't have to learn new software concepts (they would rather have an explained system that is explicit). Because of this, I made "plants" page in the nav bar be tailored to admin/consumer view depending on whether someone is logged in. This makes my nav bar very simple and self-explanatory: about, plants, and login/logout regardless of whether Skye or Minori is using the site (but gives totally different pages). Lastly, to avoid Minori accidently stumbling onto an admin-only page, I made all the content in the restricted pages (admin view all and edit) only be shown when a user is logged in. I wouldn't want Minori to find it and then blame herself for getting confused.
 
 
 ### Additional Design Justifications (Final Submission)
 > If you feel like you haven’t fully explained your design choices in the final submission, or you want to explain some functions in your site (e.g., if you feel like you make a special design choice which might not meet the final requirement), you can use the additional design justifications to justify your design choices. Remember, this is place for you to justify your design choices which you haven’t covered in the design journey. You don’t need to fill out this section if you think all design choices have been well explained in the design journey.
 
-TODO
+I wanted to clarify that even though I named my personas they are based off of Abi, just with different names.
 
 
 ### Self-Reflection (Final Submission)
 > Reflect on what you learned during this assignment. How have you improved from Project 2? What would you do differently next time?
 
-TODO
+This project was a major jump in terms of complexity of code and information. As a class, we have definitely learned an immense amount since project 2 like more complex queries, user sessions and access, editing and deleting entries, and more. Next time, I would tailor my approach to this project slightly by making sure I completed each task completely before moving onto the next. It was at times confusing to take on more than one challange at once.
 
 
 > Take some time here to reflect on how much you've learned since you started this class. It's often easy to ignore our own progress. Take a moment and think about your accomplishments in this class. Hopefully you'll recognize that you've accomplished a lot and that you should be very proud of those accomplishments!
 
-TODO
+It is amazing to see how complex of a website we can build from scratch now. I remember being so excited about being able to just created the front-end back in INFO1300, and now having an interactive database on a website is super cool. I am excited to see where else web programming and design can take me in the future consdiering how quickly we learned these concepts in class!
 
 
 ### Grading: Step-by-Step Instructions (Final Submission)
