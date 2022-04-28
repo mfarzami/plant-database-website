@@ -22,22 +22,12 @@
       <li><a href="/log-in">Log in</a></li>
     </ul>
 </nav>
-<?php //if (!is_user_logged_in()) {?>
+<?php if (!is_user_logged_in()) {?>
 <h2>Admin log in</h2>
-<form>
-<div class="field">
-<label for="username">Username:</label>
-<input type="text" id="username" name="username">
-</div>
-<div class="field">
-<label for="password">Password:</label>
-<input type="text" id="password" name="password">
-</div>
-<div class = "submit">
-<input id="login" type="submit" name="login" value="Log in" />
-</div>
-</form>
-<?php //}?>
+<?php
+      echo_login_form('/', $session_messages);
+      ?>
+<?php }?>
 </body>
 
 </html>
