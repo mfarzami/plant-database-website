@@ -171,7 +171,7 @@ FROM
 <p><em>Filter the database by growing needs and characteristics:</em></p>
 <form>
 <input type="radio" id="perennial" name="rbutton" value="perennial" <?php if ($sticky_perennial == 'checked') {?>checked<?php }?>>
-<label for="per">Perennial</label>
+<label for="perennial">Perennial</label>
 <input type="radio" id="annual" name="rbutton" value="annual"<?php if ($sticky_annual == 'checked') {?>checked<?php }?>>
 <label for="annual">Annual</label>
 <input type="radio" id="fulls" name="rbutton" value="fulls"<?php if ($sticky_fulls == 'checked') {?>checked<?php }?>>

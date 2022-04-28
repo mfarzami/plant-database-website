@@ -367,7 +367,8 @@ $relationshiprecords = $relationships->fetchAll();
 </div>
 <p>Upload an image of the plant:</p>
 <input type="hidden" name="MAX_FILE_SIZE" value="500000"/>
-<input type="file" name="upload">
+<label for ="upload">File Upload</label>
+<input type="file" name="upload" value="upload" id="upload">
 <input type="hidden" name='pid' value="<?php echo htmlspecialchars($record['id']); ?>">
 <div class="submit">
 <input id="submit" type="submit" name="submit" value="Submit" />

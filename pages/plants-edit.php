@@ -164,7 +164,7 @@ foreach($relationshiprecords as $record) {
 <label for="bio">Bio</label>
 <p>Growing needs and characteristics:</p>
 <input type="checkbox" id="perennial" name="perennial" value="perennial"<?php if (in_array(9, $tagarray)) {?> checked <?php } ?>>
-<label for="per">Perennial</label>
+<label for="perennial">Perennial</label>
 <input type="checkbox" id="annual" name="annual" value="annual"<?php if (in_array(10, $tagarray)) {?> checked <?php } ?>>
 <label for="annual">Annual</label>
 <input type="checkbox" id="fulls" name="fulls" value="fulls"<?php if (in_array(11, $tagarray)) {?> checked <?php } ?>>
