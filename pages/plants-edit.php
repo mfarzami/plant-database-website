@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <?php
 ini_set('display_errors', 1);
 
@@ -8,13 +5,12 @@ ini_set('display_errors', 1);
 $edit_id = $_GET['edit_id'];
 
 $db = init_sqlite_db('db/site.sqlite', 'db/init.sql');
-$result = exec_sql_query($db, "SELECT * FROM plants WHERE (id = $edit_id); ");$records = $result->fetchAll();
+$result = exec_sql_query($db, "SELECT * FROM plants WHERE (id = $edit_id); ");
+$records = $result->fetchAll();
 $relationships = exec_sql_query($db, "SELECT tag_id FROM relationships WHERE (plant_id = $edit_id); ");
 $relationshiprecords = $relationships->fetchAll();
-
-//if ($record) {
-//    $plant = $record['update_id'];
-//}
+$tags = exec_sql_query($db, "SELECT tag_id FROM relationships WHERE (plant_id = $edit_id); ");
+$tagrecords = $relationships->fetchAll();
 
 //update values
 if (isset($_GET["update-submit"])) {
@@ -40,28 +36,8 @@ WHERE (id = $edit_id); ");
 }
 ?>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel = "stylesheet"
-        type = "text/css"
-        href = "public/styles/theme.css"
-        media = "all"/>
-
-  <title>Playful Plants Project</title>
-</head>
-
 <body>
-<h1>Playful Plants Project</h1>
-<?php echo $sql_query ?>
-<nav>
-    <ul>
-      <li><a href="/">About</a></li>
-      <li><a href="/plants">Admin Plants</a></li>
-      <li><a href="/consumer-plants">Consumer Plants</a></li>
-      <li><a href="/log-in">Log in</a></li>
-    </ul>
-</nav>
+<?php include('includes/header.php'); ?>
 <?php foreach($records as $record) { ?>
 <form name="update" action="/edit">
     <div class = "editform">
@@ -76,8 +52,20 @@ WHERE (id = $edit_id); ");
     <input type="text" id="file_id" name="file" value="<?php echo htmlspecialchars($record['file_name']); ?>">
     </div>
 <?php }?>
+<?php $tagarray = array();
+foreach($relationshiprecords as $record) {
+    array_push($tagarray, $record['tag_id']);
+ }
+ print_r($tagarray);
+ $tagsarray = array();
+ foreach($tagarray as $element) {
+    $result1 = exec_sql_query($db, "SELECT tag FROM tags WHERE (id = $element); ")->fetchAll();
+    array_push($tagsarray, $result1);
+    //print_r($tagsarray);
+ }
+ ?>
 <p>Types of play the plant supports:</p>
-<input type="checkbox" id="con" name="con" value="con">
+<input type="checkbox" id="con" name="con" value="con" <?php if ($record['tags.tag'] == "CON") {?> checked <?php } ?>>
 <label for="con">Exploratory Constructive</label>
 <input type="checkbox" id="sens" name="sens" value="sens">
 <label for="sens">Exploratory Sensory</label>

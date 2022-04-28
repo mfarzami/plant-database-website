@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <?php
 ini_set('display_errors', 1);
 
@@ -11,28 +8,8 @@ $result = exec_sql_query($db, "SELECT * FROM plants WHERE (id = $detail_id); ");
 $records = $result->fetchAll();
 ?>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel = "stylesheet"
-        type = "text/css"
-        href = "public/styles/theme.css"
-        media = "all"/>
-
-  <title>Playful Plants Project</title>
-</head>
-
 <body>
-<h1>Playful Plants Project</h1>
-<nav>
-    <ul>
-      <li><a href="/">About</a></li>
-      <li><a href="/plants">Admin Plants</a></li>
-      <li><a href="/consumer-plants">Consumer Plants</a></li>
-      <li><a href="/detail">Detail</a></li>
-      <li><a href="/log-in">Log in</a></li>
-    </ul>
-</nav>
+<?php include('includes/header.php'); ?>
 <?php foreach($records as $record) { ?>
 <form>
   <input type = "hidden" name="detail_id" value="<?php echo htmlspecialchars($record['id']); ?>">

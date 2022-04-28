@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <?php
 
 //ini_set('display_errors', 1);
@@ -275,30 +272,8 @@ FROM
 }
 ?>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel = "stylesheet"
-        type = "text/css"
-        href = "public/styles/theme.css"
-        media = "all"/>
-
-  <title>Playful Plants Project</title>
-</head>
-
 <body>
-<h1>Playful Plants Project</h1>
-<?php echo htmlspecialchars($sql_query)?>
-<?php echo htmlspecialchars($checked_button)?>
-<?php echo htmlspecialchars($addedplantid)?>
-<nav>
-    <ul>
-      <li><a href="/">About</a></li>
-      <li><a href="/plants">Admin Plants</a></li>
-      <li><a href="/consumer-plants">Consumer Plants</a></li>
-      <li><a href="/log-in">Log in</a></li>
-    </ul>
-</nav>
+<?php include('includes/header.php'); ?>
 <h2>Plant database</h2>
 <div class="search">
 <p><em>Filter the database by growing needs and characteristics:</em></p>
@@ -351,6 +326,11 @@ FROM
     <?php $showfile = "public/images/".htmlspecialchars($record['file_name']).".jpg" ?>
     <img src=<?php echo $showfile?> alt=<?php echo htmlspecialchars($record['plant_name'])?> class="consumerpic">
     </div>
+    <div class="details">
+    <form action ="/detail" method="get">
+      <input type="hidden" name="detail_id" value="<?php echo htmlspecialchars($record['id']); ?>">
+      <input type="submit" name="details" value="Details"/>
+    </form>
     <div class="hor">
     <h3>This plant supports:</h3>
     <div class="play">

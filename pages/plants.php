@@ -1,12 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <?php
 
 //ini_set('display_errors', 1);
 
 $db = init_sqlite_db('db/site.sqlite', 'db/init.sql');
-$result = exec_sql_query($db, 'SELECT * FROM plants; ');
+$result = exec_sql_query($db, "SELECT
+plants.plant_name AS 'plant_name',
+plants.species_name AS 'species_name',
+plants.file_name AS 'file_name',
+relationships.plant_id AS 'plant_id',
+tags.tag AS 'tags.tag'
+FROM
+relationships
+INNER JOIN plants ON (plants.id = relationships.plant_id)
+INNER JOIN tags ON (tags.id = relationships.tag_id); ");
+//$result = exec_sql_query($db, 'SELECT * FROM plants; ');
 $tags = exec_sql_query($db, 'SELECT * FROM tags; ');
 $relationships = exec_sql_query($db, 'SELECT * FROM relationships; ');
 $records = $result->fetchAll();
@@ -70,6 +77,9 @@ if (isset($_POST['submit'])) {
   $flower = empty($_POST['18'])? 0:1;
   $groundcovers = empty($_POST['19'])? 0:1;
   $other = empty($_POST['20'])? 0:1;
+  $upload = $_FILES['upload'];
+  $uploadname = $upload['name'];
+  $uploadtmpname = $upload['tmp_name'];
 
 
   //if inputs not added, form doesn't go through and feedback shows
@@ -91,11 +101,13 @@ if (isset($_POST['submit'])) {
 
 if ($form_valid) {
   //add inputs to database if form went through
-  $result = exec_sql_query($db, "INSERT INTO plants (plant_name, species_name, file_name) VALUES ('$pname', '$sname', 'test')");
+  $result = exec_sql_query($db, "INSERT INTO plants (plant_name, species_name, file_name) VALUES ('$pname', '$sname', '$uploadname')");
 
   if ($ec == 1) {
   $result = exec_sql_query($db, "INSERT INTO relationships (tag_id, plant_id) VALUES (1, $pid)");}
 
+  //add file to uploads
+  move_uploaded_file($uploadname, 'public/uploads');
   //plant has been added
   if ($result) {
   $plant_added = true;
@@ -151,29 +163,8 @@ $tagrecords = $tags->fetchAll();
 $relationshiprecords = $relationships->fetchAll();
 ?>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel = "stylesheet"
-        type = "text/css"
-        href = "public/styles/theme.css"
-        media = "all"/>
-
-  <title>Playful Plants Project</title>
-</head>
-
 <body>
-<h1>Playful Plants Project</h1>
-
-<nav>
-    <ul>
-      <li><a href="/">About</a></li>
-      <li><a href="/plants">Admin Plants</a></li>
-      <li><a href="/consumer-plants">Consumer Plants</a></li>
-      <li><a href="/log-in">Log in</a></li>
-    </ul>
-</nav>
-<h2>Plant database</h2>
+<?php include('includes/header.php'); ?>
 
 <?php if ($deleted == true) { ?>
 <p>The plant with id <?php echo htmlspecialchars($delete_id) ?> has been deleted!</p>
@@ -188,11 +179,11 @@ $relationshiprecords = $relationships->fetchAll();
     <div class="name">
     <h2><?php echo htmlspecialchars($record['plant_name']);?></h2>
     <h3><?php echo htmlspecialchars($record['species_name']);?></h3>
-    <p>Plant ID:<?php echo htmlspecialchars($record['id']);?></p>
+    <p>Plant ID:<?php echo htmlspecialchars($record['plant_id']);?></p>
     <p>Photo ID:<?php echo htmlspecialchars($record['file_name']);?></p>
     <div class="details">
     <form action ="/detail" method="get">
-      <input type="hidden" name="detail_id" value="<?php echo htmlspecialchars($record['id']); ?>">
+      <input type="hidden" name="detail_id" value="<?php echo htmlspecialchars($record['plant_id']); ?>">
       <input type="submit" name="details" value="Details"/>
     </form>
     <form method="get" action="/edit">
@@ -300,7 +291,7 @@ $relationshiprecords = $relationships->fetchAll();
   <?php } ?>
 </ul>
 <h2>Add a plant</h2>
-<form id="plant-form" method="post" novalidate>
+<form id="plant-form" method="post" enctype="multipart/form-data" novalidate>
 <div class="formtext">
 <p id="name_feedback" class="feedback <?php echo $name_feedback; ?>">Please tell us your name</p>
 <div class="field">
@@ -408,6 +399,7 @@ $relationshiprecords = $relationships->fetchAll();
 </div>
 </div>
 <p>Upload an image of the plant:</p>
+<input type="hidden" name="MAX_FILE_SIZE" value="500000"/>
 <input type="file" name="upload">
 <div class="submit">
 <input id="submit" type="submit" name="submit" value="Submit" />
