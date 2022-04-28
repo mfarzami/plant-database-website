@@ -220,7 +220,7 @@ $records = $result->fetchAll();
 $tagrecords = $tags->fetchAll();
 $relationshiprecords = $relationships->fetchAll();
 ?>
-
+<?php if (is_user_logged_in()) {?>
 <body>
 <?php include('includes/header.php'); ?>
 
@@ -374,5 +374,5 @@ $relationshiprecords = $relationships->fetchAll();
 </div>
 </form>
 </body>
-
+<?php }?>
 </html>
