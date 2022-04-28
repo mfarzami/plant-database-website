@@ -3,17 +3,7 @@
 //ini_set('display_errors', 1);
 
 $db = init_sqlite_db('db/site.sqlite', 'db/init.sql');
-$result = exec_sql_query($db, "SELECT
-plants.plant_name AS 'plant_name',
-plants.species_name AS 'species_name',
-plants.file_name AS 'file_name',
-relationships.plant_id AS 'plant_id',
-tags.tag AS 'tags.tag'
-FROM
-relationships
-INNER JOIN plants ON (plants.id = relationships.plant_id)
-INNER JOIN tags ON (tags.id = relationships.tag_id); ");
-//$result = exec_sql_query($db, 'SELECT * FROM plants; ');
+$result = exec_sql_query($db, 'SELECT * FROM plants; ');
 $tags = exec_sql_query($db, 'SELECT * FROM tags; ');
 $relationships = exec_sql_query($db, 'SELECT * FROM relationships; ');
 $records = $result->fetchAll();
@@ -179,11 +169,11 @@ $relationshiprecords = $relationships->fetchAll();
     <div class="name">
     <h2><?php echo htmlspecialchars($record['plant_name']);?></h2>
     <h3><?php echo htmlspecialchars($record['species_name']);?></h3>
-    <p>Plant ID:<?php echo htmlspecialchars($record['plant_id']);?></p>
+    <p>Plant ID:<?php echo htmlspecialchars($record['id']);?></p>
     <p>Photo ID:<?php echo htmlspecialchars($record['file_name']);?></p>
     <div class="details">
     <form action ="/detail" method="get">
-      <input type="hidden" name="detail_id" value="<?php echo htmlspecialchars($record['plant_id']); ?>">
+      <input type="hidden" name="detail_id" value="<?php echo htmlspecialchars($record['id']); ?>">
       <input type="submit" name="details" value="Details"/>
     </form>
     <form method="get" action="/edit">
@@ -196,99 +186,14 @@ $relationshiprecords = $relationships->fetchAll();
     </form>
     </div>
     </div>
-    <div class="hor">
-    <h3>This plant supports:</h3>
-    <div class="play">
-    <div class="blurb">
-    <?php if ($record['tags.tag']=='EC') {?><h4>Exploratory Constructive Play</h4><?php }?>
-    </div>
-    <div class="blurb">
-    <?php if ($record['tags.tag']=='ES') {?>
-    <h4>Exploratory Sensory Play</h4><?php }?>
-    </div>
-    <div class="blurb">
-    <?php if ($record['tags.tag']=='PHYS') {?>
-    <h4>Physical Play</h4><?php }?>
-    </div>
-    <div class="blurb">
-    <?php if ($record['tags.tag']=='IMAG') {?>
-    <h4>Imaginative Play</h4><?php }?>
-    </div>
-    <div class="blurb">
-    <?php if ($record['tags.tag']=='REST') {?>
-    <h4>Restorative Play</h4><?php }?>
-    </div>
-    <div class="blurb">
-    <?php if ($record['tags.tag']=='EXP') {?>
-    <h4>Expressive Play</h4><?php }?>
-    </div>
-    <div class="blurb">
-    <?php if ($record['tags.tag']=='WR') {?>
-    <h4>Play with Rules</h4><?php }?>
-    </div>
-    <div class="blurb">
-    <?php if ($record['tags.tag']=='BP') {?>
-    <h4>Bio Play</h4><?php }?>
-    </div>
-    </div>
-    <h3>Growing needs and characteristics:</h3>
-    <div class = "play">
-    <div class="blurb">
-    <?php if ($record['tags.tag']=='PER') {?>
-    <h4>Perennial</h4><?php }?>
-    </div>
-    <div class="blurb">
-    <?php if ($record['tags.tag']=='AN') {?>
-    <h4>Annual</h4><?php }?>
-    </div>
-    <div class="blurb">
-    <?php if ($record['tags.tag']=='SUN') {?>
-    <h4>Full Sun</h4><?php }?>
-    </div>
-    <div class="blurb">
-    <?php if ($record['tags.tag']=='PS') {?>
-    <h4>Partial Sun</h4><?php }?>
-    </div>
-    <div class="blurb">
-    <?php if ($record['tags.tag']=='SHADE') {?>
-    <h4>Full Shade</h4><?php }?>
-    </div>
-    </div>
-    <h3>General classification:</h3>
-    <div class = "play">
-    <div class="blurb">
-    <?php if ($record['tags.tag']=='SHR') {?>
-    <h4>Shrub</h4><?php }?>
-    </div>
-    <div class="blurb">
-    <?php if ($record['tags.tag']=='GRASS') {?>
-    <h4>Grass</h4><?php }?>
-    </div>
-    <div class="blurb">
-    <?php if ($record['tags.tag']=='VINE') {?>
-    <h4>Vine</h4><?php }?>
-    </div>
-    <div class="blurb">
-    <?php if ($record['tags.tag']=='TREE') {?>
-    <h4>Tree</h4><?php }?>
-    </div>
-    <div class="blurb">
-    <?php if ($record['tags.tag']=='FLOW') {?>
-    <h4>Flower</h4><?php }?>
-    </div>
-    <div class="blurb">
-    <?php if ($record['tags.tag']=='GC') {?>
-    <h4>Groundcovers</h4><?php }?>
-    </div>
-    <div class="blurb">
-    <?php if ($record['tags.tag']=='OTHER') {?>
-    <h4>Other</h4><?php }?>
-    </div>
-    </div>
-    </div>
+    <?php }
+    $idcurrent = $_GET['detail_id'];
+    $relationships = exec_sql_query($db, 'SELECT tag FROM relationships WHERE (plant_id = $idcurrent); ');
+    $tagarray = array();
+    foreach($relationshiprecords as $record) {
+    array_push($tagarray, $record['tag_id']);}?>
     </div>
   </li>
-  <?php } ?>
 </ul>
 <h2>Add a plant</h2>
 <form id="plant-form" method="post" enctype="multipart/form-data" novalidate>

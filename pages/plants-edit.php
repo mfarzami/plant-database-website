@@ -51,61 +51,53 @@ WHERE (id = $edit_id); ");
     <label for="file_id">Photo ID: </label>
     <input type="text" id="file_id" name="file" value="<?php echo htmlspecialchars($record['file_name']); ?>">
     </div>
-<?php }?>
-<?php $tagarray = array();
+<?php }
+ $tagarray = array();
 foreach($relationshiprecords as $record) {
-    array_push($tagarray, $record['tag_id']);
- }
- print_r($tagarray);
- $tagsarray = array();
- foreach($tagarray as $element) {
-    $result1 = exec_sql_query($db, "SELECT tag FROM tags WHERE (id = $element); ")->fetchAll();
-    array_push($tagsarray, $result1);
-    //print_r($tagsarray);
- }
+    array_push($tagarray, $record['tag_id']);}
  ?>
 <p>Types of play the plant supports:</p>
-<input type="checkbox" id="con" name="con" value="con" <?php if ($record['tags.tag'] == "CON") {?> checked <?php } ?>>
+<input type="checkbox" id="con" name="con" value="con" <?php if (in_array(1, $tagarray)) {?> checked <?php } ?>>
 <label for="con">Exploratory Constructive</label>
-<input type="checkbox" id="sens" name="sens" value="sens">
+<input type="checkbox" id="sens" name="sens" value="sens"<?php if (in_array(2, $tagarray)) {?> checked <?php } ?>>
 <label for="sens">Exploratory Sensory</label>
-<input type="checkbox" id="ph" name="ph" value="ph">
+<input type="checkbox" id="ph" name="ph" value="ph"<?php if (in_array(3, $tagarray)) {?> checked <?php } ?>>
 <label for="ph">Physical</label>
-<input type="checkbox" id="im" name="im" value="im">
+<input type="checkbox" id="im" name="im" value="im"<?php if (in_array(4, $tagarray)) {?> checked <?php } ?>>
 <label for="im">Imaginative</label>
-<input type="checkbox" id="res" name="res" value="res">
+<input type="checkbox" id="res" name="res" value="res"<?php if (in_array(5, $tagarray)) {?> checked <?php } ?>>
 <label for="res">Restorative</label>
-<input type="checkbox" id="expr" name="expr" value="expr">
+<input type="checkbox" id="expr" name="expr" value="expr"<?php if (in_array(6, $tagarray)) {?> checked <?php } ?>>
 <label for="expr">Expressive</label>
-<input type="checkbox" id="rules" name="rules" value="rules">
+<input type="checkbox" id="rules" name="rules" value="rules"<?php if (in_array(7, $tagarray)) {?> checked <?php } ?>>
 <label for="rules">With Rules</label>
-<input type="checkbox" id="bio" name="bio" value="bio">
+<input type="checkbox" id="bio" name="bio" value="bio"<?php if (in_array(8, $tagarray)) {?> checked <?php } ?>>
 <label for="bio">Bio</label>
 <p>Growing needs and characteristics:</p>
-<input type="checkbox" id="perennial" name="perennial" value="perennial">
+<input type="checkbox" id="perennial" name="perennial" value="perennial"<?php if (in_array(9, $tagarray)) {?> checked <?php } ?>>
 <label for="per">Perennial</label>
-<input type="checkbox" id="annual" name="annual" value="annual">
+<input type="checkbox" id="annual" name="annual" value="annual"<?php if (in_array(10, $tagarray)) {?> checked <?php } ?>>
 <label for="annual">Annual</label>
-<input type="checkbox" id="fulls" name="fulls" value="fulls">
+<input type="checkbox" id="fulls" name="fulls" value="fulls"<?php if (in_array(11, $tagarray)) {?> checked <?php } ?>>
 <label for="fulls">Full Sun</label>
-<input type="checkbox" id="partials" name="partials" value="partials">
+<input type="checkbox" id="partials" name="partials" value="partials"<?php if (in_array(12, $tagarray)) {?> checked <?php } ?>>
 <label for="partials">Partial Shade</label>
-<input type="checkbox" id="fullsh" name="fullsh" value="fullsh">
+<input type="checkbox" id="fullsh" name="fullsh" value="fullsh"<?php if (in_array(13, $tagarray)) {?> checked <?php } ?>>
 <label for="fullsh">Full Shade</label>
 <p><em>General classification:</em></p>
-<input type="checkbox" id="shr" name="shr" value="shr">
+<input type="checkbox" id="shr" name="shr" value="shr"<?php if (in_array(14, $tagarray)) {?> checked <?php } ?>>
 <label for="shr">Shrub</label>
-<input type="checkbox" id="gra" name="gra" value="gra">
+<input type="checkbox" id="gra" name="gra" value="gra"<?php if (in_array(15, $tagarray)) {?> checked <?php } ?>>
 <label for="gra">Grass</label>
-<input type="checkbox" id="vin" name="vin" value="vin">
+<input type="checkbox" id="vin" name="vin" value="vin"<?php if (in_array(16, $tagarray)) {?> checked <?php } ?>>
 <label for="vin">Vine</label>
-<input type="checkbox" id="tre" name="tre" value="tre">
+<input type="checkbox" id="tre" name="tre" value="tre"<?php if (in_array(17, $tagarray)) {?> checked <?php } ?>>
 <label for="tre">Tree</label>
-<input type="checkbox" id="flo" name="flo" value="flo">
+<input type="checkbox" id="flo" name="flo" value="flo"<?php if (in_array(18, $tagarray)) {?> checked <?php } ?>>
 <label for="flo">Flower</label>
-<input type="checkbox" id="gro" name="gro" value="gro">
+<input type="checkbox" id="gro" name="gro" value="gro"<?php if (in_array(19, $tagarray)) {?> checked <?php } ?>>
 <label for="gro">Groundcovers</label>
-<input type="checkbox" id="oth" name="oth" value="oth">
+<input type="checkbox" id="oth" name="oth" value="oth"<?php if (in_array(20, $tagarray)) {?> checked <?php } ?>>
 <label for="oth">Other</label>
 <div class="formsubmit">
     <input type="submit" value="Update" name="update-submit">

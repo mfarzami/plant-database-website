@@ -23,6 +23,7 @@ h1 {
 
 .plant {
   display: inline-flex;
+  flex-direction: column;
   background-color: rgb(207, 241, 214);
   width: 1150px;
   margin-bottom: 30px;
@@ -75,11 +76,11 @@ h1 {
 .play {
   display: inline-flex;
   height: 30%;
-  margin-bottom: 50px;
+  margin-bottom: 15px;
 }
 
 .plant .play h4 {
-  height: 40px;
+  height: 20px;
 }
 
 .plant .text {
@@ -113,6 +114,10 @@ h1 {
   display: block;
   width: 400px;
   padding-top: 20px;
+}
+
+.hor .blurb {
+  margin-right: 30px;
 }
 
 .plant .play .blurb {

@@ -152,6 +152,10 @@ Here I seperately sketched out the edit/delete features of the site. I decided h
 
 I added this sketch in milestone 3 to plan the edit page for each entry. It will have a form where the admins can update anything they want and then a button that clearly states "update", which brings you back to the database to continue browsing. Skye will know exactly how to use the page since she is familiar with forms and it will automatically save her update and return her to the database with one click. The main page will also notify her that the listing was updated to assure her that her action worked.
 
+![Admin plant view](revisedadmin.jpg)
+
+I revised my design for the admin view page in my final submission to follow the suggestion I got to make the page more data-centric. I decided that since the user can navigate to the details page and see all of the plant's tags, it would be repetitive and frusterating to have Skye scroll through the unneccesary information. Skye also needs to be able to scroll quickly and efficiently in order to make sure everything is in order in the database.
+
 _URLS:_
 | Route | PHP File                            |
 | ----- | ----------------------------------- |
@@ -163,9 +167,6 @@ _URLS:_
 > Write a one paragraph (6-8 sentences) reflection explaining how you used design patterns for media catalogs in your site's final design.
 
 For the consumer view of the site, I tried out both popular layouts for a catalog: grid and tiled. Both of these are very popular in media catalogs but I went with the tiled one for the sake of Minori's cognitive styles. The detailed page when you click on an entry is also a common feature of a media catalog. Mine brings Minori to a new page with an enlarged photo and added information if she wishes to learn more. I also noticed that many interactive media catalogs (like drives/photo albums) have icons to delete/share/edit photos which I liked, but I used words instead because of Minori's cognitive styles. I tried to follow the idea of having the most important information about an entry be displayed before clicking on it, and then the rest of the information coming up after clicking. Another trend I noticed in these catalogs is that the image is always on the left hand side if it is a tile-style, which is probably because it is helpful for the user's eyeline. I followed this as well. Lastly, the sorting/filtering form is usually either on top above the entries or on the left hand side. I noticed that the form being on the left hand side is more common when there are a lot of things to filter/sort by, which there aren't in this site so I could fit it right above without being distracting.
-
-_Added in final submission:_
-Upon getting the feedback that my admin page could be more data-centric in it's design, I decided to
 
 ### Cognitive Styles Explanation/Reflection (Milestone 1)
 > Write a one paragraph (6-8 sentences) reflection explaining how your final design supports the cognitive styles of each persona.
@@ -389,7 +390,8 @@ if form submitted
 Display detail/all PHP:
 create empty array
 for each entry in relationships where id = id of plant being displayed
-  add add id to the array
+  add tag_id to the array
+display tags depending on whether their tag id is in the array
 ```
 
 ### Accessibility Audit (Final Submission)

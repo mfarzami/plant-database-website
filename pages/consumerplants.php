@@ -5,116 +5,8 @@
 $db = init_sqlite_db('db/site.sqlite', 'db/init.sql');
 $result = exec_sql_query($db, 'SELECT * FROM plants;');
 $records = $result->fetchAll();
-
-//default feedback classes as hidden
-$name_feedback = 'hidden';
-$pname_feedback = 'hidden';
-$sname_feedback = 'hidden';
-
-//default insertion for add plant as false
-$plant_added = false;
-
-//making sticky variables for add form
-$sticky_name = '';
-$sticky_pname = '';
-$sticky_sname = '';
-$sticky_ec = '';
-$sticky_es = '';
-$sticky_phys = '';
-$sticky_imag = '';
-$sticky_rest = '';
-$sticky_exp = '';
-$sticky_wr = '';
-$sticky_bp = '';
-$sticky_edible = '';
-$sticky_scent = '';
-$sticky_tactile = '';
-$sticky_visual = '';
-
-//making variables for add form inputs
-$name = NULL;
-$pname = NULL;
-$sname = NULL;
-$ec = NULL;
-$es = NULL;
-$phys = NULL;
-$imag = NULL;
-$rest = NULL;
-$exp = NULL;
-$wr = NULL;
-$bp = NULL;
-$edible = NULL;
-$scent = NULL;
-$tactile = NULL;
-$visual = NULL;
-
-//initializing form_valid as false
-$form_valid = false;
-
-//if add form is submitted take inputs into variables
-if (isset($_POST['submit'])) {
-  $form_valid = true;
-
-  $name = $_POST['name'];
-  $pname = $_POST['pname'];
-  $sname = $_POST['sname'];
-  $ec = empty($_POST['1'])? 0:1;
-  $es = empty($_POST['2'])? 0:1;
-  $phys = empty($_POST['3'])? 0:1;
-  $imag = empty($_POST['4'])? 0:1;
-  $rest = empty($_POST['5'])? 0:1;
-  $exp = empty($_POST['6'])? 0:1;
-  $wr = empty($_POST['7'])? 0:1;
-  $bp = empty($_POST['8'])? 0:1;
-  $edible = $_POST['edible'];
-  $scent = $_POST['scent'];
-  $tactile = $_POST['tactile'];
-  $visual = $_POST['visual'];
-
-  //if inputs not added, form doesn't go through and feedback shows
-  if (empty($name)) {
-    $form_valid = false;
-    $name_feedback = '';
-  }
-
-  if (empty($pname)) {
-    $form_valid = false;
-    $pname_feedback = '';
-  }
-
-  if (empty($sname)) {
-    $form_valid = false;
-    $sname_feedback = '';
-  }
-}
-
-if ($form_valid) {
-  //add inputs to database if form went through
-  $result = exec_sql_query($db, "INSERT INTO plants (plant_name, species_name, is_exploratoryconstructive, is_exploratorysensory, is_physical, is_imaginative, is_restorative, is_expressive, is_withrules, is_bioplay, edible, scent, tactile, visualinterest) VALUES ('$pname', '$sname', '$ec', '$es', '$phys', '$imag', '$rest', '$exp', '$wr', '$bp', '$edible', '$scent', '$tactile', '$visual')");
-
-  //plant has been added
-  if ($result) {
-  $plant_added = true;
-  }
-
-//if form didn't go through assign sticky values
-} else {
-  $sticky_name = $name;
-  $sticky_pname = $pname;
-  $sticky_sname = $sname;
-  $sticky_ec = (empty($ec)? NULL:"checked");
-  $sticky_es = (empty($es)? NULL:"checked");
-  $sticky_phys = (empty($phys)? NULL:"checked");
-  $sticky_imag = (empty($imag)? NULL:"checked");
-  $sticky_rest = (empty($rest)? NULL:"checked");
-  $sticky_exp = (empty($exp)? NULL:"checked");
-  $sticky_wr = (empty($wr)? NULL:"checked");
-  $sticky_bp = (empty($bp)? NULL:"checked");
-  $sticky_edible = $edible;
-  $sticky_scent = $scent;
-  $sticky_tactile = $tactile;
-  $sticky_visual = $visual;
-}
+$relationships = exec_sql_query($db, "SELECT * FROM relationships; ");
+$relationshiprecords = $relationships->fetchAll();
 
 //create sticky variables for filtering
 $sticky_perennial = '';
@@ -331,99 +223,103 @@ FROM
       <input type="hidden" name="detail_id" value="<?php echo htmlspecialchars($record['id']); ?>">
       <input type="submit" name="details" value="Details"/>
     </form>
+    <?php }
+    $tagarray = array();
+    foreach($relationshiprecords as $record) {
+    array_push($tagarray, $record['tag_id']);}
+    print_r($tagarray);?>
     <div class="hor">
     <h3>This plant supports:</h3>
     <div class="play">
     <div class="blurb">
-    <?php if ($record['tags.tag']=='EC') {?><h4>Exploratory Constructive Play</h4><?php }?>
+    <?php if (in_array(1, $tag_array)) {?><h4>Exploratory Constructive Play</h4><?php }?>
     </div>
     <div class="blurb">
-    <?php if ($record['tags.tag']=='ES') {?>
+    <?php if (in_array(2, $tag_array)) {?>
     <h4>Exploratory Sensory Play</h4><?php }?>
     </div>
     <div class="blurb">
-    <?php if ($record['tags.tag']=='PHYS') {?>
+    <?php if (in_array(3, $tag_array)) {?>
     <h4>Physical Play</h4><?php }?>
     </div>
     <div class="blurb">
-    <?php if ($record['tags.tag']=='IMAG') {?>
+    <?php if (in_array(4, $tag_array)) {?>
     <h4>Imaginative Play</h4><?php }?>
     </div>
     <div class="blurb">
-    <?php if ($record['tags.tag']=='REST') {?>
+    <?php if (in_array(5, $tag_array)) {?>
     <h4>Restorative Play</h4><?php }?>
     </div>
     <div class="blurb">
-    <?php if ($record['tags.tag']=='EXP') {?>
+    <?php if (in_array(6, $tag_array)) {?>
     <h4>Expressive Play</h4><?php }?>
     </div>
     <div class="blurb">
-    <?php if ($record['tags.tag']=='WR') {?>
+    <?php if (in_array(7, $tag_array)) {?>
     <h4>Play with Rules</h4><?php }?>
     </div>
     <div class="blurb">
-    <?php if ($record['tags.tag']=='BP') {?>
+    <?php if (in_array(8, $tag_array)) {?>
     <h4>Bio Play</h4><?php }?>
     </div>
     </div>
     <h3>Growing needs and characteristics:</h3>
     <div class = "play">
     <div class="blurb">
-    <?php if ($record['tags.tag']=='PER') {?>
+    <?php if (in_array(9, $tag_array)) {?>
     <h4>Perennial</h4><?php }?>
     </div>
     <div class="blurb">
-    <?php if ($record['tags.tag']=='AN') {?>
+    <?php if (in_array(10, $tag_array)) {?>
     <h4>Annual</h4><?php }?>
     </div>
     <div class="blurb">
-    <?php if ($record['tags.tag']=='SUN') {?>
+    <?php if (in_array(11, $tag_array)) {?>
     <h4>Full Sun</h4><?php }?>
     </div>
     <div class="blurb">
-    <?php if ($record['tags.tag']=='PS') {?>
+    <?php if (in_array(12, $tag_array)) {?>
     <h4>Partial Sun</h4><?php }?>
     </div>
     <div class="blurb">
-    <?php if ($record['tags.tag']=='SHADE') {?>
+    <?php if (in_array(13, $tag_array)) {?>
     <h4>Full Shade</h4><?php }?>
     </div>
     </div>
     <h3>General classification:</h3>
     <div class = "play">
     <div class="blurb">
-    <?php if ($record['tags.tag']=='SHR') {?>
+    <?php if (in_array(14, $tag_array)) {?>
     <h4>Shrub</h4><?php }?>
     </div>
     <div class="blurb">
-    <?php if ($record['tags.tag']=='GRASS') {?>
+    <?php if (in_array(15, $tag_array)) {?>
     <h4>Grass</h4><?php }?>
     </div>
     <div class="blurb">
-    <?php if ($record['tags.tag']=='VINE') {?>
+    <?php if (in_array(16, $tag_array)) {?>
     <h4>Vine</h4><?php }?>
     </div>
     <div class="blurb">
-    <?php if ($record['tags.tag']=='TREE') {?>
+    <?php if (in_array(17, $tag_array)) {?>
     <h4>Tree</h4><?php }?>
     </div>
     <div class="blurb">
-    <?php if ($record['tags.tag']=='FLOW') {?>
+    <?php if (in_array(18, $tag_array)) {?>
     <h4>Flower</h4><?php }?>
     </div>
     <div class="blurb">
-    <?php if ($record['tags.tag']=='GC') {?>
+    <?php if (in_array(19, $tag_array)) {?>
     <h4>Groundcovers</h4><?php }?>
     </div>
     <div class="blurb">
-    <?php if ($record['tags.tag']=='OTHER') {?>
-    <h4>Other</h4><?php }?>
+    <?php if (in_array(20, $tag_array)) {?>
+    <h4>Other</h4><?php } ?>
     </div>
     </div>
     </div>
     </div>
   </li>
-  <?php } ?>
 </ul>
 </body>
 
